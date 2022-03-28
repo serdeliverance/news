@@ -1,4 +1,5 @@
-package io.github.sdev.scrapper
+package io.github.sdev.scraper
 
-// TODO maybe refactor into an ADT
-case class ScrapError(message: String)
+import net.ruippeixotog.scalascraper.model.Element
+
+case class ScrapError(element: Element, message: String)

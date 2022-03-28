@@ -5,26 +5,27 @@ ThisBuild / version          := "0.1.0-SNAPSHOT"
 ThisBuild / organization     := "io.github.sdev"
 ThisBuild / organizationName := "sdev"
 
-val Http4sVersion          = "0.23.11"
-val CirceVersion           = "0.14.1"
-val MunitVersion           = "0.7.29"
-val LogbackVersion         = "1.2.10"
-val MunitCatsEffectVersion = "1.0.7"
+lazy val core = (project in file("core"))
+  .dependsOn(scraper)
+  .settings(coreDependencies)
 
-lazy val root = (project in file("."))
-  .settings(
-    name := "avantstay-challenge"
-  )
+lazy val scraper = (project in file("scraper"))
+  .settings(scraperDependencies)
 
-libraryDependencies ++= Seq(
-  "org.http4s"    %% "http4s-ember-server" % Http4sVersion,
-  "org.http4s"    %% "http4s-ember-client" % Http4sVersion,
-  "org.http4s"    %% "http4s-circe"        % Http4sVersion,
-  "org.http4s"    %% "http4s-dsl"          % Http4sVersion,
-  "io.circe"      %% "circe-generic"       % CirceVersion,
-  "org.scalameta" %% "munit"               % MunitVersion           % Test,
-  "org.typelevel" %% "munit-cats-effect-3" % MunitCatsEffectVersion % Test,
-  "ch.qos.logback" % "logback-classic"     % LogbackVersion         % Runtime
+lazy val scraperDependencies = libraryDependencies ++= Seq(
+  zio,
+  scalaScraper cross CrossVersion.for3Use2_13
+)
+
+lazy val coreDependencies = libraryDependencies ++= Seq(
+  http4sEmberClient,
+  http4sEmberServer,
+  http4sCirce,
+  http4sDsl,
+  circeGeneric,
+  munit            % Test,
+  munitCatsEffect3 % Test,
+  logbackClassic   % Runtime
 )
 
 testFrameworks += TestFramework("munit.Framework")

@@ -13,7 +13,7 @@ lazy val scraper = (project in file("scraper"))
   .settings(scraperDependencies)
 
 lazy val scraperDependencies = libraryDependencies ++= Seq(
-  zio,
+  catsEffect,
   scalaScraper cross CrossVersion.for3Use2_13
 )
 

@@ -9,7 +9,7 @@ object Dependencies {
     val logbackVersion         = "1.2.10"
     val munitCatsEffectVersion = "1.0.7"
     val scalaScraperVersion    = "2.2.0"
-    val zioVersion             = "1.0.13"
+    val catsEffectVersion      = "3.3.9"
   }
 
   val http4sEmberServer = "org.http4s"      %% "http4s-ember-server" % V.http4sVersion
@@ -18,7 +18,7 @@ object Dependencies {
   val http4sDsl         = "org.http4s"      %% "http4s-dsl"          % V.http4sVersion
   val circeGeneric      = "io.circe"        %% "circe-generic"       % V.circeVersion
   val scalaScraper      = "net.ruippeixotog" % "scala-scraper"       % V.scalaScraperVersion
-  val zio               = "dev.zio"         %% "zio"                 % V.zioVersion
+  val catsEffect        = "org.typelevel"   %% "cats-effect"         % V.catsEffectVersion
   val munit             = "org.scalameta"   %% "munit"               % V.munitVersion
   val munitCatsEffect3  = "org.typelevel"   %% "munit-cats-effect-3" % V.munitCatsEffectVersion
   val logbackClassic    = "ch.qos.logback"   % "logback-classic"     % V.logbackVersion

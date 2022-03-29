@@ -11,9 +11,9 @@ import cats.syntax.all._
 import com.comcast.ip4s._
 import cats.effect.Resource
 
-object HttpServer:
+object HttpServer {
   def make: Stream[IO, Nothing] = {
-    for
+    for {
       client <- Stream.resource(EmberClientBuilder.default[IO].build)
       httpApp = (
         NewsRoutes.routes
@@ -28,5 +28,6 @@ object HttpServer:
           .build >>
           Resource.eval(IO.never)
       )
-    yield exitCode
+    } yield exitCode
   }.drain
+}

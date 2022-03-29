@@ -4,9 +4,10 @@ import cats.effect.IOApp
 import io.github.sdev.scraper.Scraper._
 import cats.effect.ExitCode
 
-object CatsExample extends IOApp.Simple:
+object CatsExample extends IOApp.Simple {
 
   val run =
     scrapNews("https://www.nytimes.com/")
       .map(news => news.foreach(println))
-      .map(_ => ExitCode.Success)
+      .as(ExitCode.Success)
+}

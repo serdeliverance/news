@@ -24,6 +24,8 @@ lazy val coreDependencies = libraryDependencies ++= Seq(
   http4sDsl,
   circeGeneric,
   circeGenericsExtras,
+  quillJdbcMonix,
+  postgres,
   munit            % Test,
   munitCatsEffect3 % Test,
   logbackClassic   % Runtime

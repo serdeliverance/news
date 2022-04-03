@@ -17,7 +17,7 @@ class NewsRepositoryImpl(sessions: Resource[IO, Session[IO]]) extends NewsReposi
     .query(varchar ~ varchar)
     .map { case title ~ link => NewsEntity(title, link) }
 
-  // TODO
+  // FIXME
   override def findAll(): IO[List[News]] =
     sessions.use { session =>
       session

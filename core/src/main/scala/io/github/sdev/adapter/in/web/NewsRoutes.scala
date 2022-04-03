@@ -1,4 +1,4 @@
-package io.github.sdev.adapter.web
+package io.github.sdev.adapter.in.web
 
 import cats.implicits._
 import org.http4s.HttpRoutes
@@ -9,9 +9,8 @@ object NewsRoutes {
   def routes: HttpRoutes[IO] = {
     val dsl = new Http4sDsl[IO] {}
     import dsl._
-    HttpRoutes.of[IO] {
-      case GET -> Root / "news" =>
-        Ok("Ok")
+    HttpRoutes.of[IO] { case GET -> Root / "news" =>
+      Ok("Ok")
     }
   }
 }

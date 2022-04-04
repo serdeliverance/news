@@ -1,7 +1,7 @@
 package io.github.sdev.adapter.out.persistence
 
 import io.github.sdev.application.json.ports.out.NewsRepository
-import io.github.sdev.adapter.out.persistence.NewsEntityOps._
+import io.github.sdev.adapter.out.persistence.Ops.NewsEntityOps
 import io.github.sdev.scraper.News
 import cats.effect.IO
 
@@ -22,7 +22,7 @@ class NewsRepositoryImpl(sessions: Resource[IO, Session[IO]]) extends NewsReposi
     sessions.use { session =>
       session
         .execute(findAllQuery)
-        .map(entities => entities.map(_.toDomain))
+        .map(entities => entities.map(e => e.toDomain))
     }
 
   override def save(news: News): IO[Unit] = ???

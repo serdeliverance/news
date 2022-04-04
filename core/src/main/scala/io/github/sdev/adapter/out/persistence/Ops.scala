@@ -9,4 +9,9 @@ object Ops {
     def toDomain: News =
       News(entity.title, entity.link)
   }
+
+  implicit class NewsOps(news: News) {
+    def toEntity: NewsEntity =
+      NewsEntity(news.title, news.link)
+  }
 }

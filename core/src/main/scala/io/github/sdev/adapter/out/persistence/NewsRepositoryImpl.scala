@@ -13,11 +13,15 @@ import cats.effect.kernel.Resource
 
 class NewsRepositoryImpl(sessions: Resource[IO, Session[IO]]) extends NewsRepository {
 
-  private val findAllQuery = sql"SELECT title, link FROM news"
-    .query(varchar ~ varchar)
-    .map { case title ~ link => NewsEntity(title, link) }
+  // decoders
+  private val newsEntityDecoder: Decoder[NewsEntity] =
+    (varchar(50) ~ varchar(255)).gmap[NewsEntity]
 
-  private val insert = sql"INSERT INTO news(title, link) VALUES($varchar, $varchar)".command
+  // queries ands comands
+  private val findAllQuery = sql"SELECT title, link FROM headlines"
+    .query(newsEntityDecoder)
+
+  private val insertCommand = sql"INSERT INTO headlines(title, link) VALUES($varchar, $varchar)".command
     .gcontramap[NewsEntity]
 
   override def findAll(): IO[List[News]] =
@@ -27,6 +31,11 @@ class NewsRepositoryImpl(sessions: Resource[IO, Session[IO]]) extends NewsReposi
         .map(entities => entities.map(e => e.toDomain))
     }
 
-  override def save(news: News): IO[Unit] = ???
+  override def save(news: News): IO[Unit] =
+    sessions.use { session =>
+      session.prepare(insertCommand).use { command =>
+        command.execute(news.toEntity).void
+      }
+    }
 
 }

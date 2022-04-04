@@ -15,4 +15,5 @@ I use `IO` directly because I hate parametric effects.
 - graphql config with http4s
 
 ## less priority
+- (refactor) add tagless final
 - adding tests

@@ -1,4 +1,4 @@
-package io.github.sdev.adapter.web
+package io.github.sdev.adapter.in.web
 
 import org.http4s.ember.client.EmberClientBuilder
 import fs2.Stream

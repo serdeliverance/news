@@ -6,4 +6,6 @@ import io.github.sdev.scraper.News
 trait NewsRepository {
 
   def findAll(): IO[List[News]]
+
+  def save(news: News): IO[Unit]
 }

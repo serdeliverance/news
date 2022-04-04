@@ -24,4 +24,6 @@ class NewsRepositoryImpl(sessions: Resource[IO, Session[IO]]) extends NewsReposi
         .execute(findAllQuery)
         .map(entities => entities.map(_.toDomain))
     }
+
+  override def save(news: News): IO[Unit] = ???
 }

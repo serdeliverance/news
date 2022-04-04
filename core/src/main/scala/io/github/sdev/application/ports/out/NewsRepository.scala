@@ -1,4 +1,4 @@
-package io.github.sdev.application.json.ports.out
+package io.github.sdev.application.ports.out
 
 import cats.effect.IO
 import io.github.sdev.scraper.News

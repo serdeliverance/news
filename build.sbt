@@ -8,28 +8,21 @@ ThisBuild / organizationName := "sdev"
 ThisBuild / libraryDependencySchemes += "org.typelevel" %% "cats-effect" % "always"
 
 lazy val core = (project in file("core"))
-  .dependsOn(scraper)
   .settings(coreDependencies)
-
-lazy val scraper = (project in file("scraper"))
-  .settings(scraperDependencies)
 
 lazy val playground = (project in file("playground"))
   .dependsOn(core)
   .settings(playgroundDependencies)
 
-lazy val scraperDependencies = libraryDependencies ++= Seq(
-  catsEffect,
-  scalaScraper
-)
-
 lazy val coreDependencies = libraryDependencies ++= Seq(
+  catsEffect,
   http4sEmberClient,
   http4sEmberServer,
   http4sCirce,
   http4sDsl,
   circeGeneric,
   circeGenericsExtras,
+  scalaScraper,
   skunk,
   postgres,
   munit            % Test,

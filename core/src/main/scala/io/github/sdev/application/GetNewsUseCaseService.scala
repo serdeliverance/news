@@ -16,14 +16,8 @@ class GetNewsUseCaseService(scraperService: ScraperService, newsRepository: News
         if (isCacheEmpty)
           newsRepository.findAll()
         else IO.pure(cachedNews)
-      _ <- updateCacheConditionally(isCacheEmpty, news)
+      _ <- IO.whenA(isCacheEmpty)(cache.save(news))
       areNewHeadlinesAvailable = isCacheEmpty
-      _ <- saveNewsConditionally(areNewHeadlinesAvailable, news)
+      _ <- IO.whenA(isCacheEmpty)(newsRepository.save(news))
     } yield news
-
-  // TODO
-  private def updateCacheConditionally(condition: Boolean, news: => List[News]): IO[Unit] = ???
-
-  // TODO
-  private def saveNewsConditionally(condition: Boolean, news: => List[News]): IO[Unit] = ???
 }

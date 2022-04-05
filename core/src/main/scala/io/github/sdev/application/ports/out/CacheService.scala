@@ -5,4 +5,6 @@ import io.github.sdev.scraper.News
 
 trait CacheService {
   def getAll(): IO[List[News]]
+
+  def save(news: List[News]): IO[Unit]
 }

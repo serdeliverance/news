@@ -8,4 +8,6 @@ trait NewsRepository {
   def findAll(): IO[List[News]]
 
   def save(news: News): IO[Unit]
+
+  def save(news: List[News]): IO[Unit]
 }

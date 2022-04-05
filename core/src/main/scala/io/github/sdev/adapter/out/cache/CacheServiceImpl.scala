@@ -7,4 +7,7 @@ import io.github.sdev.scraper.News
 class CacheServiceImpl extends CacheService {
   // TODO
   override def getAll(): IO[List[News]] = ???
+
+  // TODO
+  override def save(news: List[News]): IO[Unit] = ???
 }

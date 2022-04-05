@@ -38,4 +38,6 @@ class NewsRepositoryImpl(sessions: Resource[IO, Session[IO]]) extends NewsReposi
       }
     }
 
+  // TODO
+  override def save(news: List[News]): IO[Unit] = ???
 }

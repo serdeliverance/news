@@ -7,10 +7,10 @@ import io.github.sdev.scraper.News
 import io.circe.Printer
 import io.circe.generic.extras.Configuration
 
-object SerDes{
+object SerDes {
   implicit val customPrinter: Printer      = Printer.noSpaces.copy(dropNullValues = true)
   implicit val customConfig: Configuration = Configuration.default.withSnakeCaseMemberNames
 
-  implicit val newsEncoder:Encoder[News] = deriveConfiguredEncoder[News]
+  implicit val newsEncoder: Encoder[News] = deriveConfiguredEncoder[News]
   implicit val newsDecoder: Decoder[News] = deriveConfiguredDecoder[News]
 }

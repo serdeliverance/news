@@ -1,6 +1,6 @@
 package io.github.sdev.adapter.out.persistence
 
-import io.github.sdev.application.json.ports.out.NewsRepository
+import io.github.sdev.application.ports.out.NewsRepository
 import io.github.sdev.adapter.out.persistence.Ops._
 import io.github.sdev.scraper.News
 import cats.effect.IO
@@ -38,4 +38,6 @@ class NewsRepositoryImpl(sessions: Resource[IO, Session[IO]]) extends NewsReposi
       }
     }
 
+  // TODO
+  override def save(news: List[News]): IO[Unit] = ???
 }

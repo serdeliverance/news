@@ -25,6 +25,7 @@ lazy val coreDependencies = libraryDependencies ++= Seq(
   scalaScraper,
   skunk,
   postgres,
+  redis4Cats,
   munit            % Test,
   munitCatsEffect3 % Test,
   logbackClassic   % Runtime

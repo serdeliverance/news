@@ -5,16 +5,17 @@ import net.ruippeixotog.scalascraper.dsl.DSL._
 import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
 import net.ruippeixotog.scalascraper.dsl.DSL.Parse._
 import net.ruippeixotog.scalascraper.model.Element
-import cats.effect.IO
 import io.github.sdev.application.ports.out.ScraperService
+import cats.effect.Sync
+import cats.syntax.all._
 
-class ScraperServiceImpl extends ScraperService {
+class ScraperServiceImpl[F[_]: Sync] extends ScraperService[F] {
   // TODO improve IO using (maybe delay, etc it depends on the case)
-  def scrapNews(siteUrl: String): IO[List[News]] =
+  def scrapNews(siteUrl: String): F[List[News]] =
     for {
-      browser <- IO(JsoupBrowser())
-      doc     <- IO(browser.get(siteUrl))
-      stories <- IO(doc >> elementList("#site-content section [class=story-wrapper]"))
+      browser <- Sync[F].delay(JsoupBrowser())
+      doc     <- Sync[F].delay(browser.get(siteUrl))
+      stories <- Sync[F].delay(doc >> elementList("#site-content section [class=story-wrapper]"))
       news = stories.map(parseContent).collect { case Right(news) => news }
     } yield news
 

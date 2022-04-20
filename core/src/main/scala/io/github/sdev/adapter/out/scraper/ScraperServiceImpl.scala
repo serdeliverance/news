@@ -8,16 +8,22 @@ import net.ruippeixotog.scalascraper.model.Element
 import io.github.sdev.application.ports.out.ScraperService
 import cats.effect.Sync
 import cats.syntax.all._
+import org.typelevel.log4cats.Logger
 
-class ScraperServiceImpl[F[_]: Sync] extends ScraperService[F] {
-  // TODO improve IO using (maybe delay, etc it depends on the case)
-  def scrapNews(siteUrl: String): F[List[News]] =
+class ScraperServiceImpl[F[_]: Sync: Logger] extends ScraperService[F] {
+  // TODO add error handling
+  def scrapNews(siteUrl: String): F[List[News]] = {
+    val browser = JsoupBrowser()
     for {
-      browser <- Sync[F].delay(JsoupBrowser())
-      doc     <- Sync[F].delay(browser.get(siteUrl))
-      stories <- Sync[F].delay(doc >> elementList("#site-content section [class=story-wrapper]"))
-      news = stories.map(parseContent).collect { case Right(news) => news }
+      _   <- Logger[F].info(s"Scraping news from $siteUrl")
+      doc <- browser.get(siteUrl).pure[F]
+      news <- Sync[F]
+        .delay(doc >> elementList("#site-content section [class=story-wrapper]"))
+        .map { result =>
+          result.map(parseContent).collect { case Right(news) => news }
+        }
     } yield news
+  }
 
   private def parseContent(element: Element): Either[ScrapError, News] = {
     val title     = element >> allText("h3")

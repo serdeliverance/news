@@ -28,7 +28,8 @@ lazy val coreDependencies = libraryDependencies ++= Seq(
   redis4Cats,
   munit            % Test,
   munitCatsEffect3 % Test,
-  logbackClassic   % Runtime
+  log4cats,
+  logbackClassic % Runtime
 )
 
 lazy val playgroundDependencies =

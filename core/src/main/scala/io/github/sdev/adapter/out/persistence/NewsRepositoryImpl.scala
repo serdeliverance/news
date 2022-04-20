@@ -3,15 +3,20 @@ package io.github.sdev.adapter.out.persistence
 import io.github.sdev.application.ports.out.NewsRepository
 import io.github.sdev.adapter.out.persistence.Ops._
 import io.github.sdev.scraper.News
-import cats.effect.IO
 
+import cats.effect._
 import skunk._
 import skunk.implicits._
 import skunk.codec.all._
 import io.github.sdev.adapter.out.persistence.models.NewsEntity
 import cats.effect.kernel.Resource
+import cats.syntax.all._
+import cats.effect.syntax.all._
+import cats.syntax.all._
+import cats.Monad
+import cats.Applicative
 
-class NewsRepositoryImpl(sessions: Resource[IO, Session[IO]]) extends NewsRepository {
+class NewsRepositoryImpl[F[_]: Monad](sessions: Resource[F, Session[F]]) extends NewsRepository[F] {
 
   // decoders
   private val newsEntityDecoder: Decoder[NewsEntity] =
@@ -24,14 +29,14 @@ class NewsRepositoryImpl(sessions: Resource[IO, Session[IO]]) extends NewsReposi
   private val insertCommand = sql"INSERT INTO headlines(title, link) VALUES($varchar, $varchar)".command
     .gcontramap[NewsEntity]
 
-  override def findAll(): IO[List[News]] =
+  override def findAll(): F[List[News]] =
     sessions.use { session =>
       session
         .execute(findAllQuery)
         .map(entities => entities.map(e => e.toDomain))
     }
 
-  override def save(news: News): IO[Unit] =
+  override def save(news: News): F[Unit] =
     sessions.use { session =>
       session.prepare(insertCommand).use { command =>
         command.execute(news.toEntity).void
@@ -39,5 +44,5 @@ class NewsRepositoryImpl(sessions: Resource[IO, Session[IO]]) extends NewsReposi
     }
 
   // TODO
-  override def save(news: List[News]): IO[Unit] = ???
+  override def save(news: List[News]): F[Unit] = ???
 }

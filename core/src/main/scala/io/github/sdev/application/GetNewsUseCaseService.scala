@@ -16,6 +16,8 @@ class GetNewsUseCaseService[F[_]: Monad: Applicative](
     newsRepository: NewsRepository[F],
     cache: CacheService[F]
 ) extends GetNewsUseCase[F] {
+
+  // TODO refactor flow using Effects system niceties
   override def getNews(): F[List[News]] =
     for {
       cachedNews <- cache.getAll()

@@ -16,7 +16,7 @@ import cats.syntax.all._
 import cats.Monad
 import cats.Applicative
 
-class NewsRepositoryImpl[F[_]: Monad](sessions: Resource[F, Session[F]]) extends NewsRepository[F] {
+class NewsRepositoryImpl[F[_]: Monad](sessions: Resource[F, Session[F]])(implicit F: MonadCancel[F, Throwable]) extends NewsRepository[F] {
 
   // decoders
   private val newsEntityDecoder: Decoder[NewsEntity] =

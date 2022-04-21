@@ -11,7 +11,6 @@ import cats.Monad
 import cats.effect.IO
 import cats.Applicative
 
-// TODO add tagless final to this algebra (we are hardcoding IO here)
 class GetNewsUseCaseService[F[_]: Monad: Applicative](
     scraperService: ScraperService[F],
     newsRepository: NewsRepository[F],

@@ -8,7 +8,7 @@ import io.github.sdev.application.ports.out.CacheService
 import io.github.sdev.application.ports.out.NewsRepository
 
 // TODO add tagless final to this algebra (we are hardcoding IO here)
-class GetNewsUseCaseService(scraperService: ScraperService[IO], newsRepository: NewsRepository[IO], cache: CacheService)
+class GetNewsUseCaseService(scraperService: ScraperService[IO], newsRepository: NewsRepository[IO], cache: CacheService[IO])
     extends GetNewsUseCase {
   override def getNews(): IO[List[News]] =
     for {

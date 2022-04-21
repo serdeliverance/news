@@ -7,6 +7,7 @@ object Dependencies {
     val circeVersion        = "0.14.1"
     val munitVersion        = "0.7.29"
     val logbackVersion      = "1.2.10"
+    val log4catsVersion     = "2.2.0"
     val munitCatsEffect     = "1.0.7"
     val scalaScraper        = "2.2.0"
     val catsEffectVersion   = "3.3.9"
@@ -31,4 +32,5 @@ object Dependencies {
   val munit            = "org.scalameta" %% "munit"               % V.munitVersion
   val munitCatsEffect3 = "org.typelevel" %% "munit-cats-effect-3" % V.munitCatsEffect
   val logbackClassic   = "ch.qos.logback" % "logback-classic"     % V.logbackVersion
+  val log4cats         = "org.typelevel" %% "log4cats-slf4j"      % V.log4catsVersion
 }

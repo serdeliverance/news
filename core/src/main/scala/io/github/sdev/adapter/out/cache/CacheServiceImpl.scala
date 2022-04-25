@@ -18,9 +18,11 @@ class CacheServiceImpl[F[_]: Logger](redisCommands: RedisCommands[F, String, Str
     F: MonadCancel[F, Throwable]
 ) extends CacheService[F] {
 
+  private val NEWS_KEY = "news"
+
   override def getAll(): F[List[News]] =
     redisCommands
-      .get("news")
+      .get(NEWS_KEY)
       .flatMap {
         case Some(result) =>
           result.asJson.as[List[News]] match {
@@ -34,5 +36,5 @@ class CacheServiceImpl[F[_]: Logger](redisCommands: RedisCommands[F, String, Str
       }
 
   override def save(news: List[News]): F[Unit] =
-    redisCommands.set("news", news.toString, effects.SetArgs(config.ttl)).void
+    redisCommands.set(NEWS_KEY, news.toString, effects.SetArgs(config.ttl)).void
 }

@@ -22,7 +22,7 @@ class NewsRepositoryImpl[F[_]: Monad](sessions: Resource[F, Session[F]])(implici
   private val newsEntityDecoder: Decoder[NewsEntity] =
     (varchar(50) ~ varchar(255)).gmap[NewsEntity]
 
-  // queries ands comands
+  // queries and comands
   private val findAllQuery = sql"SELECT title, link FROM headlines"
     .query(newsEntityDecoder)
 
@@ -43,6 +43,6 @@ class NewsRepositoryImpl[F[_]: Monad](sessions: Resource[F, Session[F]])(implici
       }
     }
 
-  // TODO
+  // TODO implement bulk insert
   override def save(news: List[News]): F[Unit] = ???
 }

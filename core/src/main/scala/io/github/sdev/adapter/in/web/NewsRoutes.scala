@@ -13,7 +13,7 @@ object NewsRoutes {
     val dsl = new Http4sDsl[F] {}
     import dsl._
     HttpRoutes.of[F] { case GET -> Root / "news" =>
-      getNewsUseCaseService.getNews().flatMap(Ok(_))
+      getNewsUseCaseService.getNews().flatMap(_ => Ok("ok")) // FIXME encoding
     }
   }
 }

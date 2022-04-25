@@ -7,14 +7,10 @@ ThisBuild / organizationName := "sdev"
 
 ThisBuild / libraryDependencySchemes += "org.typelevel" %% "cats-effect" % "always"
 
-lazy val core = (project in file("core"))
-  .settings(coreDependencies)
+lazy val root = (project in file("."))
+  .settings(dependencies)
 
-lazy val playground = (project in file("playground"))
-  .dependsOn(core)
-  .settings(playgroundDependencies)
-
-lazy val coreDependencies = libraryDependencies ++= Seq(
+lazy val dependencies = libraryDependencies ++= Seq(
   catsEffect,
   http4sEmberServer,
   http4sCirce,
@@ -32,12 +28,5 @@ lazy val coreDependencies = libraryDependencies ++= Seq(
   log4cats,
   logbackClassic % Runtime
 )
-
-lazy val playgroundDependencies =
-  libraryDependencies ++= Seq(
-    catsEffect,
-    skunk,
-    postgres
-  )
 
 testFrameworks += TestFramework("munit.Framework")

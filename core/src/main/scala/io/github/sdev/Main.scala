@@ -3,9 +3,7 @@ package example.io.github.sdev
 import cats.effect.IOApp
 import cats.effect.ExitCode
 
-import org.http4s.ember.client.EmberClientBuilder
 import fs2.Stream
-import org.http4s.ember.client.EmberClientBuilder
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.implicits._
 import org.http4s.server.middleware.{ Logger => HttpLogger }

@@ -10,24 +10,30 @@ import cats.syntax.all._
 import cats.Monad
 import cats.effect.IO
 import cats.Applicative
+import org.typelevel.log4cats.Logger
 
-class GetNewsUseCaseService[F[_]: Monad: Applicative](
+class GetNewsUseCaseService[F[_]: Monad: Applicative: Logger](
     scraperService: ScraperService[F],
     newsRepository: NewsRepository[F],
     cache: CacheService[F]
 ) extends GetNewsUseCase[F] {
 
-  // TODO refactor flow using Effects system niceties
+  // TODO remove hardcoding and extract into configuration
+  private val URL = "https://www.nytimes.com/"
+
   override def getNews(): F[List[News]] =
     for {
+      _          <- Logger[F].info("Retrieving news")
       cachedNews <- cache.getAll()
-      isCacheEmpty = cachedNews.isEmpty
       news <-
-        if (isCacheEmpty)
-          newsRepository.findAll()
-        else cachedNews.pure[F]
-      _ <- Applicative[F].whenA(isCacheEmpty)(cache.save(news))
-      areNewHeadlinesAvailable = isCacheEmpty
-      _ <- Applicative[F].whenA(isCacheEmpty)(newsRepository.save(news))
+        if (cachedNews.nonEmpty)
+          cachedNews.pure[F]
+        else
+          Logger[F].info("Scraping news from web") *>
+            scraperService
+              .scrapNews(URL)
+              .flatTap { news =>
+                Logger[F].info("Saving news into db and updating cache") *> newsRepository.save(news) *> cache.save(news)
+              }
     } yield news
 }

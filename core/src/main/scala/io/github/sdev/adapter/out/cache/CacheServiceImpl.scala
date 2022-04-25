@@ -10,15 +10,32 @@ import dev.profunktor.redis4cats.effects
 import cats.effect.kernel.MonadCancel
 import cats.syntax.all._
 import dev.profunktor.redis4cats.RedisCommands
+import org.typelevel.log4cats.Logger
+import io.github.sdev.application.json.SerDes._
+import io.circe.syntax._
+import io.circe.parser.decode
 
-class CacheServiceImpl[F[_]](redisCommands: RedisCommands[F, String, String], config: CacheConfig)(implicit
+class CacheServiceImpl[F[_]: Logger](redisCommands: RedisCommands[F, String, String], config: CacheConfig)(implicit
     F: MonadCancel[F, Throwable]
 ) extends CacheService[F] {
 
-  // TODO
-  override def getAll(): F[List[News]] = ???
+  private val NEWS_KEY = "news"
 
-  // TODO
+  override def getAll(): F[List[News]] =
+    redisCommands
+      .get(NEWS_KEY)
+      .flatMap {
+        case Some(result) =>
+          decode[List[News]](result) match {
+            case Right(news) => news.pure[F]
+            case Left(err) =>
+              Logger[F].error("Error decoding news from redis") *>
+                List.empty[News].pure[F]
+          }
+        case None =>
+          Logger[F].info("There is no news on cache") *> List.empty[News].pure[F]
+      }
+
   override def save(news: List[News]): F[Unit] =
-    redisCommands.set("news", news.toString, effects.SetArgs(config.ttl)).void
+    redisCommands.set(NEWS_KEY, news.asJson.noSpaces, effects.SetArgs(config.ttl)).void
 }

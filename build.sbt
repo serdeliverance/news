@@ -16,10 +16,11 @@ lazy val playground = (project in file("playground"))
 
 lazy val coreDependencies = libraryDependencies ++= Seq(
   catsEffect,
-  http4sEmberClient,
   http4sEmberServer,
   http4sCirce,
   http4sDsl,
+  circeCore,
+  circeParser,
   circeGeneric,
   circeGenericsExtras,
   scalaScraper,

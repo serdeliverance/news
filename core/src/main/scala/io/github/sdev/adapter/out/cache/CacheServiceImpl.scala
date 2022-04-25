@@ -9,8 +9,9 @@ import dev.profunktor.redis4cats.effects.SetArg.Ttl.Px
 import dev.profunktor.redis4cats.effects
 import cats.effect.kernel.MonadCancel
 import cats.syntax.all._
+import dev.profunktor.redis4cats.RedisCommands
 
-class CacheServiceImpl[F[_]](redisClient: Resource[F, StringCommands[F, String, String]], config: CacheConfig)(implicit
+class CacheServiceImpl[F[_]](redisCommands: RedisCommands[F, String, String], config: CacheConfig)(implicit
     F: MonadCancel[F, Throwable]
 ) extends CacheService[F] {
 
@@ -19,7 +20,5 @@ class CacheServiceImpl[F[_]](redisClient: Resource[F, StringCommands[F, String, 
 
   // TODO
   override def save(news: List[News]): F[Unit] =
-    redisClient.use { command =>
-      command.set("news", news.toString, effects.SetArgs(config.ttl)).void
-    }
+    redisCommands.set("news", news.toString, effects.SetArgs(config.ttl)).void
 }

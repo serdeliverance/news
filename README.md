@@ -1,27 +1,35 @@
 # Challenge
 
-## Approach
+## Stack
 
-- hexagonal architecture
-- TDD
+- Scala
+- Cats Effect (Fs2, Skunk, Redis4Cats)
+- Postgres
+- Redis
+- Hexagonal Architecture
 
-## Disclaimer
+## Instructions
 
-I use `IO` directly because I hate parametric effects.
+1. Run dockers:
+
+```
+docker-compose up
+```
+
+2. Run the app:
+
+``` scala
+sbt core/run
+```
+
+It will startup the app on `localhost:8080`
 
 #### TODO
 
-- business logic:
+- implemente business logic
     - add logs
     - add unit tests
-    - implement cache (redis) layer
 - graphql config with http4s
-
-## less priority
-- (refactor) add tagless final
-- adding tests
+- add pure config
 
 ## Comments/Discussion (with myself)
-
-- In [Main](./core/src/main/scala/io/github/sdev/Main.scala), I'm creating different resources (`postgres`, `redis clients`, etc) and lifted them into a monadic context trough `pure[F]`. that way, I can continue creating resource in the `for-comprehension`. I saw in [Practical Functiona Programming book]() that `Gabriel` creates an `AppResources` class where he creates all the resources as a hole and wraps then inside and parametric effect (the `AppResources` class). Evaluate if this approach is better than the one that I applied.
-- Ask for help with server instantiation. To learn best practices for setting app the server on Main function.

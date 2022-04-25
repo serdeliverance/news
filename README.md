@@ -8,6 +8,12 @@
 - `Redis`
 - `Hexagonal Architecture`
 
+## Architecture overview
+
+The application follows the `Hexagonal Architecture` (`Ports and Adapters` pattern) approach, having our `Domain` at core of the application layering and ony being accessed by the `Application`. Also we have different ports and adapters that allows the communication with the outside components in both directions (from outside to inside and viceversa).
+
+![Alt text](diagrams/architecture.png?raw=true "Architecture")
+
 ## Instructions
 
 1. Run dockers:

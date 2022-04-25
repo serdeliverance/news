@@ -33,7 +33,7 @@ class GetNewsUseCaseService[F[_]: Monad: Applicative: Logger](
             scraperService
               .scrapNews(URL)
               .flatTap { news =>
-                Logger[F].info("Saving news into repository and updating cache") *> newsRepository.save(news) *> cache.save(news)
+                Logger[F].info("Saving news into db and updating cache") *> newsRepository.save(news) *> cache.save(news)
               }
     } yield news
 }

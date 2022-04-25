@@ -2,11 +2,11 @@
 
 ## Stack
 
-- Scala
-- Cats Effect (Fs2, Skunk, Redis4Cats)
-- Postgres
-- Redis
-- Hexagonal Architecture
+- `Scala`
+- `Cats Effect` (`Fs2`, `Skunk`, `Redis4Cats`)
+- `Postgres`
+- `Redis`
+- `Hexagonal Architecture`
 
 ## Instructions
 
@@ -26,10 +26,10 @@ It will startup the app on `localhost:8080`
 
 #### TODO
 
-- implemente business logic
+- add bulk insert with `Skunk`
+- implement business logic
     - add logs
     - add unit tests
+- improve logging tracking info (nowaways it shows `sdev.Main`, instead of current service classes)
 - graphql config with http4s
 - add pure config
-
-## Comments/Discussion (with myself)

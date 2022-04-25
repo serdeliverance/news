@@ -13,6 +13,7 @@ import dev.profunktor.redis4cats.RedisCommands
 import org.typelevel.log4cats.Logger
 import io.github.sdev.application.json.SerDes._
 import io.circe.syntax._
+import io.circe.parser.decode
 
 class CacheServiceImpl[F[_]: Logger](redisCommands: RedisCommands[F, String, String], config: CacheConfig)(implicit
     F: MonadCancel[F, Throwable]
@@ -25,7 +26,7 @@ class CacheServiceImpl[F[_]: Logger](redisCommands: RedisCommands[F, String, Str
       .get(NEWS_KEY)
       .flatMap {
         case Some(result) =>
-          result.asJson.as[List[News]] match {
+          decode[List[News]](result) match {
             case Right(news) => news.pure[F]
             case Left(err) =>
               Logger[F].error("Error decoding news from redis") *>
@@ -36,5 +37,5 @@ class CacheServiceImpl[F[_]: Logger](redisCommands: RedisCommands[F, String, Str
       }
 
   override def save(news: List[News]): F[Unit] =
-    redisCommands.set(NEWS_KEY, news.toString, effects.SetArgs(config.ttl)).void
+    redisCommands.set(NEWS_KEY, news.asJson.noSpaces, effects.SetArgs(config.ttl)).void
 }

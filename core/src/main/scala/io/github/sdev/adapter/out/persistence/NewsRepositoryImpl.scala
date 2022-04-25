@@ -44,5 +44,6 @@ class NewsRepositoryImpl[F[_]: Monad](sessions: Resource[F, Session[F]])(implici
     }
 
   // TODO implement bulk insert
-  override def save(news: List[News]): F[Unit] = ???
+  override def save(news: List[News]): F[Unit] =
+    Applicative[F].pure(())
 }

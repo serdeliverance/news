@@ -20,6 +20,7 @@ lazy val coreDependencies = libraryDependencies ++= Seq(
   http4sCirce,
   http4sDsl,
   circeCore,
+  circeParser,
   circeGeneric,
   circeGenericsExtras,
   scalaScraper,

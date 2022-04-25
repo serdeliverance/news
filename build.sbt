@@ -1,31 +1,32 @@
 import Dependencies._
 
-ThisBuild / scalaVersion     := "3.1.1"
+ThisBuild / scalaVersion     := "2.13.8"
 ThisBuild / version          := "0.1.0-SNAPSHOT"
 ThisBuild / organization     := "io.github.sdev"
 ThisBuild / organizationName := "sdev"
 
-lazy val core = (project in file("core"))
-  .dependsOn(scraper)
-  .settings(coreDependencies)
+ThisBuild / libraryDependencySchemes += "org.typelevel" %% "cats-effect" % "always"
 
-lazy val scraper = (project in file("scraper"))
-  .settings(scraperDependencies)
+lazy val root = (project in file("."))
+  .settings(dependencies)
 
-lazy val scraperDependencies = libraryDependencies ++= Seq(
-  zio,
-  scalaScraper cross CrossVersion.for3Use2_13
-)
-
-lazy val coreDependencies = libraryDependencies ++= Seq(
-  http4sEmberClient,
+lazy val dependencies = libraryDependencies ++= Seq(
+  catsEffect,
   http4sEmberServer,
   http4sCirce,
   http4sDsl,
+  circeCore,
+  circeParser,
   circeGeneric,
+  circeGenericsExtras,
+  scalaScraper,
+  skunk,
+  postgres,
+  redis4Cats,
   munit            % Test,
   munitCatsEffect3 % Test,
-  logbackClassic   % Runtime
+  log4cats,
+  logbackClassic % Runtime
 )
 
 testFrameworks += TestFramework("munit.Framework")

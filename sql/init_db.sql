@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS "headlines";
+
+CREATE TABLE IF NOT EXISTS "headlines" (
+  link VARCHAR(255) PRIMARY KEY,
+  title VARCHAR(50) NOT NULL
+);

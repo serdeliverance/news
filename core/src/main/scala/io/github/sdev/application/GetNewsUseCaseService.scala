@@ -10,8 +10,9 @@ import cats.syntax.all._
 import cats.Monad
 import cats.effect.IO
 import cats.Applicative
+import org.typelevel.log4cats.Logger
 
-class GetNewsUseCaseService[F[_]: Monad: Applicative](
+class GetNewsUseCaseService[F[_]: Monad: Applicative: Logger](
     scraperService: ScraperService[F],
     newsRepository: NewsRepository[F],
     cache: CacheService[F]
@@ -20,6 +21,7 @@ class GetNewsUseCaseService[F[_]: Monad: Applicative](
   // TODO refactor flow using Effects system niceties
   override def getNews(): F[List[News]] =
     for {
+      _          <- Logger[F].info("Retrieving news")
       cachedNews <- cache.getAll()
       isCacheEmpty = cachedNews.isEmpty
       news <-

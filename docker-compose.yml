@@ -2,6 +2,12 @@ version: '3.7'
 
 services:
 
+  redis:
+    restart: always
+    image: redis:6.0.8
+    ports:
+      - 6379:6379
+
   postgres:
     image: postgres:latest
     environment:

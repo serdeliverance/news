@@ -1,4 +1,6 @@
-# Challenge
+# News
+
+The objetive of this app is to expose and `API` that retrieves info from[The NyTime's Website](https://www.nytimes.com/).
 
 ## Stack
 
@@ -29,6 +31,10 @@ sbt core/run
 ```
 
 It will startup the app on `localhost:8080`
+
+## Endpoints
+
+The endpoints exposed by the `API` are on [this file](requests.http)
 
 #### TODO
 

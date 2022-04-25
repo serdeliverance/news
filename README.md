@@ -27,9 +27,8 @@ It will startup the app on `localhost:8080`
 #### TODO
 
 - add bulk insert with `Skunk`
-- implement business logic
-    - add logs
-    - add unit tests
+- add more logs
+- add unit tests
 - improve logging tracking info (nowaways it shows `sdev.Main`, instead of current service classes)
 - graphql config with http4s
 - add pure config

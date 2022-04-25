@@ -1,4 +1,6 @@
-# Challenge
+# News
+
+The objetive of this app is to expose and `API` that retrieves info from [The NyTime's Website](https://www.nytimes.com/).
 
 ## Stack
 
@@ -7,6 +9,12 @@
 - `Postgres`
 - `Redis`
 - `Hexagonal Architecture`
+
+## Architecture overview
+
+The application follows the `Hexagonal Architecture` (`Ports and Adapters` pattern) approach, having our `Domain` at core of the application layering and ony being accessed by the `Application`. Also we have different ports and adapters that allows the communication with the outside components in both directions (from outside to inside and viceversa).
+
+![Alt text](diagrams/architecture.png?raw=true "Architecture")
 
 ## Instructions
 
@@ -24,12 +32,18 @@ sbt core/run
 
 It will startup the app on `localhost:8080`
 
+## Endpoints
+
+The endpoints exposed by the `API` are on [this file](requests.http)
+
 #### TODO
 
 - add bulk insert with `Skunk`
-- implement business logic
-    - add logs
-    - add unit tests
+- add more logs
+- add unit tests
 - improve logging tracking info (nowaways it shows `sdev.Main`, instead of current service classes)
 - graphql config with http4s
 - add pure config
+- add api endpoints versioning
+- add docker artifact generation
+- add kubernetes

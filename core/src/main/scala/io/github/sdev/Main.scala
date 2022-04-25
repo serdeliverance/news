@@ -56,8 +56,8 @@ object Main extends IOApp {
           max = 10
         )
       redisCommands <- Redis[F].utf8("redis://localhost")
-      cacheConfig           = CacheConfig(1000 * 3600)  // TODO remove hardcoding and extract from configuration
-      scraperService        = new ScraperServiceImpl[F] // TODO add logger (it conflicts with line 35)
+      cacheConfig           = CacheConfig(1000 * 3600) // TODO remove hardcoding and extract from configuration
+      scraperService        = new ScraperServiceImpl[F]
       newsRepository        = new NewsRepositoryImpl[F](sessions)
       cacheService          = new CacheServiceImpl[F](redisCommands, cacheConfig)
       getNewsUseCaseService = new GetNewsUseCaseService[F](scraperService, newsRepository, cacheService)

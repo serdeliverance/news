@@ -38,12 +38,16 @@ The endpoints exposed by the `API` are on [this file](requests.http)
 
 #### TODO
 
+- improve sbt tooling for development workflow (for example: `running tests when file changes`)
 - add bulk insert with `Skunk`
 - add more logs
 - add unit tests
 - improve logging tracking info (nowaways it shows `sdev.Main`, instead of current service classes)
+- add github actions
 - graphql config with http4s
 - add pure config
 - add api endpoints versioning
 - add docker artifact generation
 - add kubernetes
+- add scalasteward
+- add scalafix

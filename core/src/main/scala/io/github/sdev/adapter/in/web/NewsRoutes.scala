@@ -5,7 +5,8 @@ import org.http4s.HttpRoutes
 import org.http4s.dsl.Http4sDsl
 import cats.effect.Sync
 import io.github.sdev.application.GetNewsUseCaseService
-import org.http4s.circe.CirceEntityDecoder._
+import org.http4s.circe.CirceEntityEncoder._
+import io.github.sdev.application.json.SerDes.newsEncoder
 
 object NewsRoutes {
 
@@ -13,7 +14,7 @@ object NewsRoutes {
     val dsl = new Http4sDsl[F] {}
     import dsl._
     HttpRoutes.of[F] { case GET -> Root / "news" =>
-      getNewsUseCaseService.getNews().flatMap(_ => Ok("ok")) // FIXME encoding
+      Ok(getNewsUseCaseService.getNews())
     }
   }
 }

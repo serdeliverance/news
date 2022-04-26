@@ -9,5 +9,5 @@ case class CacheConfig(ttl: effects.SetArg.Ttl.Px)
 
 object CacheConfig {
 
-  def apply(ttl: Int): CacheConfig = new CacheConfig(effects.SetArg.Ttl.Px(ttl.millis))
+  def apply(ttl: FiniteDuration): CacheConfig = new CacheConfig(effects.SetArg.Ttl.Px(ttl))
 }

@@ -18,19 +18,20 @@ object Dependencies {
     val pureConfig          = "0.17.1"
   }
 
-  val http4sEmberServer   = "org.http4s"            %% "http4s-ember-server"  % V.http4sVersion
-  val http4sCirce         = "org.http4s"            %% "http4s-circe"         % V.http4sVersion
-  val http4sDsl           = "org.http4s"            %% "http4s-dsl"           % V.http4sVersion
-  val circeCore           = "io.circe"              %% "circe-core"           % V.circeVersion
-  val circeParser         = "io.circe"              %% "circe-parser"         % V.circeVersion
-  val circeGeneric        = "io.circe"              %% "circe-generic"        % V.circeVersion
-  val scalaScraper        = "net.ruippeixotog"      %% "scala-scraper"        % V.scalaScraper
-  val catsEffect          = "org.typelevel"         %% "cats-effect"          % V.catsEffectVersion
-  val circeGenericsExtras = "io.circe"              %% "circe-generic-extras" % V.circeGenericsExtras
-  val skunk               = "org.tpolecat"          %% "skunk-core"           % V.skunk
-  val postgres            = "org.postgresql"         % "postgresql"           % V.postgres
-  val redis4Cats          = "dev.profunktor"        %% "redis4cats-effects"   % V.redis4Cats
-  val pureConfig          = "com.github.pureconfig" %% "pureconfig"           % V.pureConfig
+  val http4sEmberServer    = "org.http4s"            %% "http4s-ember-server"    % V.http4sVersion
+  val http4sCirce          = "org.http4s"            %% "http4s-circe"           % V.http4sVersion
+  val http4sDsl            = "org.http4s"            %% "http4s-dsl"             % V.http4sVersion
+  val circeCore            = "io.circe"              %% "circe-core"             % V.circeVersion
+  val circeParser          = "io.circe"              %% "circe-parser"           % V.circeVersion
+  val circeGeneric         = "io.circe"              %% "circe-generic"          % V.circeVersion
+  val scalaScraper         = "net.ruippeixotog"      %% "scala-scraper"          % V.scalaScraper
+  val catsEffect           = "org.typelevel"         %% "cats-effect"            % V.catsEffectVersion
+  val circeGenericsExtras  = "io.circe"              %% "circe-generic-extras"   % V.circeGenericsExtras
+  val skunk                = "org.tpolecat"          %% "skunk-core"             % V.skunk
+  val postgres             = "org.postgresql"         % "postgresql"             % V.postgres
+  val redis4Cats           = "dev.profunktor"        %% "redis4cats-effects"     % V.redis4Cats
+  val pureConfig           = "com.github.pureconfig" %% "pureconfig"             % V.pureConfig
+  val pureConfigCatsEffect = "com.github.pureconfig" %% "pureconfig-cats-effect" % V.pureConfig
 
   val munit            = "org.scalameta" %% "munit"               % V.munitVersion
   val munitCatsEffect3 = "org.typelevel" %% "munit-cats-effect-3" % V.munitCatsEffect

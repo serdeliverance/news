@@ -27,7 +27,7 @@ docker-compose up
 2. Run the app:
 
 ``` scala
-sbt core/run
+sbt run
 ```
 
 It will startup the app on `localhost:8080`
@@ -45,7 +45,6 @@ The endpoints exposed by the `API` are on [this file](requests.http)
 - improve logging tracking info (nowaways it shows `sdev.Main`, instead of current service classes)
 - add github actions
 - graphql config with http4s
-- add pure config
 - add api endpoints versioning
 - add docker artifact generation
 - add kubernetes

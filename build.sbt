@@ -24,6 +24,8 @@ lazy val dependencies = libraryDependencies ++= Seq(
   redis4Cats,
   pureConfig,
   pureConfigCatsEffect,
+  sangria,
+  sangriaCirce,
   munit            % Test,
   munitCatsEffect3 % Test,
   log4cats,

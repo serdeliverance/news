@@ -23,6 +23,8 @@ lazy val dependencies = libraryDependencies ++= Seq(
   skunk,
   postgres,
   redis4Cats,
+  pureConfig,
+  pureConfigCatsEffect,
   munit            % Test,
   munitCatsEffect3 % Test,
   log4cats,

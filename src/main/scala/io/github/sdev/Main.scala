@@ -33,6 +33,10 @@ import org.typelevel.log4cats.slf4j.Slf4jLogger
 import org.typelevel.log4cats.Logger
 import cats.effect.IO
 import dev.profunktor.redis4cats.effect.Log.Stdout._
+import pureconfig.ConfigSource
+import pureconfig.generic.auto._
+import pureconfig.module.catseffect.syntax._
+import io.github.sdev.application.config.Config
 
 object Main extends IOApp {
 
@@ -44,17 +48,18 @@ object Main extends IOApp {
       Slf4jLogger.getLogger[F]
 
     for {
+      config <- Resource.eval(ConfigSource.default.loadF[F, Config.AppConfig])
       sessions <- Session
         .pooled[F](
-          host = "localhost",
-          port = 5432,
-          user = "root",
-          database = "news",
-          password = Some("root"),
-          max = 10
+          host = config.db.host,
+          port = config.db.port,
+          user = config.db.user,
+          database = config.db.database,
+          password = config.db.password.pure[Option],
+          max = config.db.maxSessions
         )
-      redisCommands <- Redis[F].utf8("redis://localhost")
-      cacheConfig           = CacheConfig(1000 * 3600) // TODO remove hardcoding and extract from configuration
+      redisCommands <- Redis[F].utf8(config.redis.url)
+      cacheConfig           = CacheConfig(config.cache.ttl)
       scraperService        = new ScraperServiceImpl[F]
       newsRepository        = new NewsRepositoryImpl[F](sessions)
       cacheService          = new CacheServiceImpl[F](redisCommands, cacheConfig)
@@ -66,8 +71,8 @@ object Main extends IOApp {
       server <-
         EmberServerBuilder
           .default[F]
-          .withHost(ipv4"0.0.0.0")
-          .withPort(port"8080")
+          .withHost(ipv4"0.0.0.0") // TODO refactor: remove hardcoded string and use Config instead
+          .withPort(port"8080")    // TODO refactor: remove hardcoded string and use Config instead
           .withHttpApp(finalHttpApp)
           .build
     } yield server

@@ -16,6 +16,7 @@ object Dependencies {
     val postgres            = "42.2.11"
     val redis4Cats          = "1.1.1"
     val pureConfig          = "0.17.1"
+    val organizeImports     = "0.6.0"
   }
 
   val http4sEmberServer    = "org.http4s"            %% "http4s-ember-server"    % V.http4sVersion
@@ -32,6 +33,7 @@ object Dependencies {
   val redis4Cats           = "dev.profunktor"        %% "redis4cats-effects"     % V.redis4Cats
   val pureConfig           = "com.github.pureconfig" %% "pureconfig"             % V.pureConfig
   val pureConfigCatsEffect = "com.github.pureconfig" %% "pureconfig-cats-effect" % V.pureConfig
+  val organizeImports      = "com.github.liancheng"  %% "organize-imports"       % V.organizeImports
 
   val munit            = "org.scalameta" %% "munit"               % V.munitVersion
   val munitCatsEffect3 = "org.typelevel" %% "munit-cats-effect-3" % V.munitCatsEffect

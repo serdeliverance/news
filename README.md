@@ -48,5 +48,4 @@ The endpoints exposed by the `API` are on [this file](requests.http)
 - add github actions
 - add kubernetes
 - add scalasteward
-- add scalafix
-- improve sbt tooling for development workflow (for example: `running tests when file changes`)
+- fix `scalaFix` command

@@ -38,6 +38,8 @@ The endpoints exposed by the `API` are on [this file](requests.http)
 
 #### TODO
 
+- add pure config
+- change cache.ttl to duration on HOCON config
 - improve sbt tooling for development workflow (for example: `running tests when file changes`)
 - add bulk insert with `Skunk`
 - add more logs

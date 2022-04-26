@@ -38,14 +38,14 @@ The endpoints exposed by the `API` are on [this file](requests.http)
 
 #### TODO
 
+- graphql config with http4s
 - add bulk insert with `Skunk`
 - add more logs
 - add unit tests
+- add docker artifact generation
+- add api endpoints versioning
 - improve logging tracking info (nowaways it shows `sdev.Main`, instead of current service classes)
 - add github actions
-- graphql config with http4s
-- add api endpoints versioning
-- add docker artifact generation
 - add kubernetes
 - add scalasteward
 - add scalafix

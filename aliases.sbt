@@ -12,15 +12,11 @@ addCommandAlias("rs", "reStart")
 addCommandAlias("s", "reStop")
 addCommandAlias(
   "styleCheck",
-  "scalafmtSbtCheck; scalafmtCheckAll; Test / compile; scalafixAll --check"
+  "scalafmtSbtCheck; scalafmtCheckAll; Test / compile; scalafixAll --check",
 )
 addCommandAlias(
   "styleFix",
-  "Test / compile; scalafixAll; scalafmtSbt; scalafmtAll"
-)
-addCommandAlias(
-  "up2date",
-  "reload plugins; dependencyUpdates; reload return; dependencyUpdates"
+  "Test / compile; scalafixAll; scalafmtSbt; scalafmtAll",
 )
 
 onLoadMessage +=

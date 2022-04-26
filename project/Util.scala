@@ -4,13 +4,8 @@ import scala.sys.process._
 import sbt._
 
 object Util {
-
   def styled(in: Any): String =
     scala.Console.CYAN + in + scala.Console.RESET
-
-  def prompt(projectName: String): String =
-    gitPrompt
-      .fold(projectPrompt(projectName)) { gitPrompt => s"$gitPrompt:${projectPrompt(projectName)}" }
 
   def projectName(state: State): String =
     Project
@@ -18,19 +13,7 @@ object Util {
       .currentRef
       .project
 
-  private def gitPrompt: Option[String] =
-    for {
-      b <- branch.map(styled)
-      h <- hash.map(styled)
-    } yield s"git:$b:$h"
-
-  private def branch: Option[String] =
-    run("git rev-parse --abbrev-ref HEAD")
-
-  private def hash: Option[String] =
-    run("git rev-parse --short HEAD")
-
-  private def projectPrompt(projectName: String): String =
+  def prompt(projectName: String): String =
     s"sbt:${styled(projectName)}"
 
   private def run(command: String): Option[String] =

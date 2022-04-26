@@ -27,7 +27,7 @@ docker-compose up
 2. Run the app:
 
 ``` scala
-sbt core/run
+sbt run
 ```
 
 It will startup the app on `localhost:8080`

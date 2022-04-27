@@ -16,6 +16,8 @@ The application follows the `Hexagonal Architecture` (`Ports and Adapters` patte
 
 ![Alt text](diagrams/architecture.png?raw=true "Architecture")
 
+`Disclaimer`: I know, maybe `hexagonal architecture` is an overkill for this problem. However, using this approach allows flexibility to add new adapters without chaging the `domain` and `application` layer (for example, when I added `GraphQL`). Also, it allows lot of flexility for refactoring. For example, at the beginning I start using `Skunk` for the `database` layer. At the end I refactored to use `Quill` instead and the transition was transparent for the inner layers.
+
 ## Instructions
 
 1. Run dockers:

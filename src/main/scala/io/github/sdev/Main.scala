@@ -39,7 +39,6 @@ import pureconfig.module.catseffect.syntax._
 import io.github.sdev.application.config.Config
 
 object Main extends IOApp {
-
   def createServer[F[_]: Async: Console] = {
     val stringCodec: redis4cats.data.RedisCodec[String, String] =
       RedisCodec.Utf8
@@ -56,14 +55,19 @@ object Main extends IOApp {
           user = config.db.user,
           database = config.db.database,
           password = config.db.password.pure[Option],
-          max = config.db.maxSessions
+          max = config.db.maxSessions,
         )
       redisCommands <- Redis[F].utf8(config.redis.url)
-      cacheConfig           = CacheConfig(config.cache.ttl)
-      scraperService        = new ScraperServiceImpl[F]
-      newsRepository        = new NewsRepositoryImpl[F](sessions)
-      cacheService          = new CacheServiceImpl[F](redisCommands, cacheConfig)
-      getNewsUseCaseService = new GetNewsUseCaseService[F](scraperService, newsRepository, cacheService)
+      cacheConfig = CacheConfig(config.cache.ttl)
+      scraperService = new ScraperServiceImpl[F]
+      newsRepository = new NewsRepositoryImpl[F](sessions)
+      cacheService = new CacheServiceImpl[F](redisCommands, cacheConfig)
+      getNewsUseCaseService = new GetNewsUseCaseService[F](
+        scraperService,
+        newsRepository,
+        cacheService,
+        config.scraper.url,
+      )
       httpApp = (
         NewsRoutes.endpoints[F](getNewsUseCaseService)
       ).orNotFound
@@ -72,7 +76,7 @@ object Main extends IOApp {
         EmberServerBuilder
           .default[F]
           .withHost(ipv4"0.0.0.0") // TODO refactor: remove hardcoded string and use Config instead
-          .withPort(port"8080")    // TODO refactor: remove hardcoded string and use Config instead
+          .withPort(port"8080") // TODO refactor: remove hardcoded string and use Config instead
           .withHttpApp(finalHttpApp)
           .build
     } yield server

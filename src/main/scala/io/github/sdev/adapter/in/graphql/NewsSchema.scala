@@ -4,7 +4,7 @@ import sangria.schema._
 import io.github.sdev.domain.entities.News
 import io.github.sdev.application.GetNewsUseCaseService
 
-object NewType {
+object NewsSchema {
 
   def apply[F[_]]: ObjectType[GetNewsUseCaseService[F], News] =
     ObjectType(

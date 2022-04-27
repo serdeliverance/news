@@ -18,6 +18,7 @@ lazy val dependencies = libraryDependencies ++= Seq(
   circeParser,
   circeGeneric,
   circeGenericsExtras,
+  circeOptics,
   scalaScraper,
   skunk,
   postgres,

@@ -27,6 +27,7 @@ object Dependencies {
   val circeCore            = "io.circe"              %% "circe-core"             % V.circeVersion
   val circeParser          = "io.circe"              %% "circe-parser"           % V.circeVersion
   val circeGeneric         = "io.circe"              %% "circe-generic"          % V.circeVersion
+  val circeOptics          = "io.circe"              %% "circe-optics"           % V.circeVersion
   val scalaScraper         = "net.ruippeixotog"      %% "scala-scraper"          % V.scalaScraper
   val catsEffect           = "org.typelevel"         %% "cats-effect"            % V.catsEffectVersion
   val circeGenericsExtras  = "io.circe"              %% "circe-generic-extras"   % V.circeGenericsExtras

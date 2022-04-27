@@ -48,7 +48,7 @@ object Main extends IOApp {
       Slf4jLogger.getLogger[F]
 
     for {
-      config <- Resource.eval(ConfigSource.default.loadF[F, Config.AppConfig])
+      config <- Resource.eval(ConfigSource.default.loadF[F, Config.AppConfig]())
       sessions <- Session
         .pooled[F](
           host = config.db.host,

@@ -38,6 +38,29 @@ It will startup the app on `localhost:8080`
 
 The endpoints exposed by the `API` are on [this file](requests.http)
 
+## Some words about Styling
+
+I tried to use `Hexagonal Architecture` in an `OOP` way but because of habit. For example, the following snippet:
+
+``` scala
+class CacheServiceImpl[F[_]: Logger](redisCommands: RedisCommands[F, String, String], config: CacheConfig) extends CacheService[F] {
+    // logic
+}
+```
+
+Could be implemented in a more `Scala FP` way:
+
+``` scala
+object CacheService {
+    def apply[F[_]: Logger](redisCommands: RedisCommands[F, String, String], config: CacheConfig) =
+        new CacheService[F] {
+            ???
+        }
+}
+```
+
+But it is just a matter of style.
+
 #### TODO
 
 - graphql config with http4s

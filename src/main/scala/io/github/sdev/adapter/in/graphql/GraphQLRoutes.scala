@@ -9,16 +9,18 @@ import org.http4s.dsl._
 
 object GraphQLRoutes {
 
-  def apply[F[_]: Sync](graphQL: GraphQL[F]): HttpRoutes[F] = {
+  /** An `HttpRoutes` that maps the standard `/graphql` path to a `GraphQL` instace. */
+  def apply[F[_]: Sync](
+      graphQL: GraphQL[F]
+  ): HttpRoutes[F] = {
     val dsl = new Http4sDsl[F] {}
     import dsl._
-    HttpRoutes.of[F] { case req @ POST -> Root / "graphql" =>
-      // FIXME
+    HttpRoutes.of[F] { case req @ POST -> Root / "graphql" ⇒
       req.as[Json].flatMap(graphQL.query).flatMap {
         case Right(json) => Ok(json)
         case Left(json)  => BadRequest(json)
       }
     }
-
   }
+
 }

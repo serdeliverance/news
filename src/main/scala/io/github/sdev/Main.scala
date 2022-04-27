@@ -10,7 +10,7 @@ import org.http4s.server.middleware.{ Logger => HttpLogger }
 import cats.syntax.all._
 import com.comcast.ip4s._
 
-import io.github.sdev.adapter.in.web.NewsRoutes
+import io.github.sdev.adapter.in.rest.NewsRoutes
 import io.github.sdev.application.GetNewsUseCaseService
 import io.github.sdev.application.ports.out.ScraperService
 import io.github.sdev.scraper.ScraperServiceImpl

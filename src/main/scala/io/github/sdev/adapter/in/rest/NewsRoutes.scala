@@ -1,4 +1,4 @@
-package io.github.sdev.adapter.in.web
+package io.github.sdev.adapter.in.rest
 
 import cats.implicits._
 import org.http4s.HttpRoutes

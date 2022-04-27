@@ -1,4 +1,4 @@
-package io.github.sdev.adapter.in.graphql
+package io.github.sdev.adapter.in.graphql.schema
 
 import sangria.schema._
 import io.github.sdev.domain.entities.News

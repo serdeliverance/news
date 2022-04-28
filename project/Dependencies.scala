@@ -21,6 +21,8 @@ object Dependencies {
     val doobie              = "1.0.0-RC2"
     val quill               = "3.14.1"
     val doobieQuill         = "0.0.5"
+    val mockitoCore         = "3.5.13"
+    val mockitoScala        = "1.16.42"
   }
 
   val http4sEmberServer    = "org.http4s"            %% "http4s-ember-server"    % V.http4sVersion
@@ -48,6 +50,8 @@ object Dependencies {
 
   val munit            = "org.scalameta" %% "munit"               % V.munitVersion
   val munitCatsEffect3 = "org.typelevel" %% "munit-cats-effect-3" % V.munitCatsEffect
+  val mockitoCore      = "org.mockito"    % "mockito-core"        % V.mockitoCore
+  val mockitoScala     = "org.mockito"   %% "mockito-scala"       % V.mockitoScala
   val logbackClassic   = "ch.qos.logback" % "logback-classic"     % V.logbackVersion
   val log4cats         = "org.typelevel" %% "log4cats-slf4j"      % V.log4catsVersion
 }

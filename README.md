@@ -67,8 +67,7 @@ But it is just a matter of style.
 
 #### TODO
 
-- graphql config with http4s
-- add bulk insert with `Skunk` (refactor to add `Quill` instead)
+- add bulk insert with `Quill`
 - add unit tests
 
 #### TODO / Improvements

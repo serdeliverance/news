@@ -69,13 +69,15 @@ But it is just a matter of style.
 
 #### TODO
 
+- `log4cats` is not working since some `sangria` and `quill` stuff was added. It needs some fixes.
 - add unit tests
-- add error handling and http error code on that cases
+- add error handling and http error codes
 
-#### TODO / Improvements
+#### Future Improvements
 - some refactors in [NewsRepositoryImpl](src/main/scala/io/github/sdev/adapter/out/persistence/NewsRepositoryImpl.scala)
 - removing warning related with versions of `log4j` versions
 - add more logs
+- add integration tests with test containers
 - add docker artifact generation
 - add kubernetes
 - migrate to `Scala 3`

@@ -18,32 +18,32 @@ import io.getquill._
 import doobie.util.transactor.Transactor
 import cats.Applicative
 import Ops.NewsOps
+import io.getquill.quotation.QuotedAst
 
 class NewsRepositoryImpl[F[_]](xa: Transactor[F])(implicit F: MonadCancel[F, Throwable]) extends NewsRepository[F] {
 
   private val db = new DoobieContext.Postgres(Literal)
   import db._
 
+  private final val TABLE_NAME = "headlines"
+
   // TODO refactor to avoid duplication of code
   override def save(news: News): F[Unit] = {
     val insertQuote = quote {
-      querySchema[NewsEntity]("headlines").insertValue(lift(news.toEntity))
+      querySchema[NewsEntity](TABLE_NAME).insertValue(lift(news.toEntity))
     }
 
     // TODO add error handling with logging
-    // TODO refactor conversion to unit (()), using map is not very expressive
     run(insertQuote).transact(xa).map(_ => ())
   }
 
   override def save(news: List[News]): F[Unit] = {
     val entities = news.map(_.toEntity)
     val bulkInsertQuote = quote {
-      liftQuery(entities).foreach(n => querySchema[NewsEntity]("headlines").insertValue(n))
+      liftQuery(entities).foreach(n => querySchema[NewsEntity](TABLE_NAME).insertValue(n))
     }
 
     // TODO add error handling with logging
-    // TODO refactor conversion to unit (()), using map is not very expressive
     run(bulkInsertQuote).transact(xa).map(_ => ())
   }
-
 }

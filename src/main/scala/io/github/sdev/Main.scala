@@ -43,6 +43,7 @@ import sangria.schema.Schema
 import io.github.sdev.adapter.in.graphql.schema.QueryType
 import scala.concurrent.ExecutionContext
 import java.util.concurrent.Executors
+import io.github.sdev.adapter.in.graphql.GraphQLRoutes
 
 object Main extends IOApp {
 
@@ -84,7 +85,7 @@ object Main extends IOApp {
         ).pure[F]
       )
       httpApp = (
-        NewsRoutes.endpoints[F](getNewsUseCaseService)
+        NewsRoutes.endpoints[F](getNewsUseCaseService) <+> GraphQLRoutes[F](graphQL)
       ).orNotFound
       finalHttpApp = HttpLogger.httpApp(true, true)(httpApp)
       server <-

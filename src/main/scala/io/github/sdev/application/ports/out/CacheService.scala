@@ -1,7 +1,7 @@
 package io.github.sdev.application.ports.out
 
 import cats.effect.IO
-import io.github.sdev.scraper.News
+import io.github.sdev.domain.entities.News
 
 trait CacheService[F[_]] {
   def getAll(): F[List[News]]

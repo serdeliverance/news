@@ -10,6 +10,8 @@ import cats.effect.Sync
 import cats.syntax.all._
 import org.typelevel.log4cats.Logger
 
+import io.github.sdev.domain.entities.News
+
 class ScraperServiceImpl[F[_]: Sync: Logger] extends ScraperService[F] {
   // TODO add error handling
   def scrapNews(siteUrl: String): F[List[News]] = {
@@ -20,7 +22,7 @@ class ScraperServiceImpl[F[_]: Sync: Logger] extends ScraperService[F] {
       news <- Sync[F]
         .delay(doc >> elementList("#site-content section [class=story-wrapper]"))
         .map { result =>
-          result.map(parseContent).collect { case Right(news) => news }
+          result.map(parseContent).collect { case Right(news) if news.title.nonEmpty => news }
         }
     } yield news
   }

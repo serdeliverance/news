@@ -1,7 +1,6 @@
 import Dependencies._
 
 ThisBuild / scalaVersion     := "2.13.8"
-ThisBuild / version          := "0.1.0-SNAPSHOT"
 ThisBuild / organization     := "io.github.sdev"
 ThisBuild / organizationName := "sdev"
 
@@ -19,10 +18,19 @@ lazy val dependencies = libraryDependencies ++= Seq(
   circeParser,
   circeGeneric,
   circeGenericsExtras,
+  circeOptics,
   scalaScraper,
-  skunk,
+  doobieCore,
+  doobiePostgres,
+  doobieHickari,
+  quill,
+  doobieQuill,
   postgres,
   redis4Cats,
+  pureConfig,
+  pureConfigCatsEffect,
+  sangria,
+  sangriaCirce,
   munit            % Test,
   munitCatsEffect3 % Test,
   log4cats,

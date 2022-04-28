@@ -1,7 +1,7 @@
 package io.github.sdev.adapter.out.persistence
 
 import io.github.sdev.adapter.out.persistence.models.NewsEntity
-import io.github.sdev.scraper.News
+import io.github.sdev.domain.entities.News
 
 object Ops {
 

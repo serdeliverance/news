@@ -76,6 +76,7 @@ But it is just a matter of style.
 - some refactors in [NewsRepositoryImpl](src/main/scala/io/github/sdev/adapter/out/persistence/NewsRepositoryImpl.scala)
 - removing warning related with versions of `log4j` versions
 - add more logs
+- add integration tests with test containers
 - add docker artifact generation
 - add kubernetes
 - migrate to `Scala 3`

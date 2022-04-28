@@ -69,10 +69,10 @@ But it is just a matter of style.
 
 - add bulk insert with `Quill`
 - add unit tests
+- add error handling and http error code on that cases
 
 #### TODO / Improvements
 - add more logs
-- add retry logic if `JSoup` fails
 - add docker artifact generation
 - add kubernetes
 - migrate to `Scala 3`

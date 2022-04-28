@@ -17,6 +17,7 @@ import io.getquill.{ idiom => _, _ }
 import io.getquill._
 import doobie.util.transactor.Transactor
 import cats.Applicative
+import Ops.NewsOps
 
 class NewsRepositoryImpl[F[_]](xa: Transactor[F])(implicit F: MonadCancel[F, Throwable]) extends NewsRepository[F] {
 
@@ -26,7 +27,7 @@ class NewsRepositoryImpl[F[_]](xa: Transactor[F])(implicit F: MonadCancel[F, Thr
   // TODO refactor to avoid duplication of code
   override def save(news: News): F[Unit] = {
     val insertQuote = quote {
-      query[News].insertValue(lift(news))
+      querySchema[NewsEntity]("headlines").insertValue(lift(news.toEntity))
     }
 
     // TODO add error handling with logging
@@ -35,8 +36,9 @@ class NewsRepositoryImpl[F[_]](xa: Transactor[F])(implicit F: MonadCancel[F, Thr
   }
 
   override def save(news: List[News]): F[Unit] = {
+    val entities = news.map(_.toEntity)
     val bulkInsertQuote = quote {
-      liftQuery(news).foreach(n => query[News].insertValue(n))
+      liftQuery(entities).foreach(n => querySchema[NewsEntity]("headlines").insertValue(n))
     }
 
     // TODO add error handling with logging

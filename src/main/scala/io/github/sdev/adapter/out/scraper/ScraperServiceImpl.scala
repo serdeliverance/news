@@ -22,7 +22,7 @@ class ScraperServiceImpl[F[_]: Sync: Logger] extends ScraperService[F] {
       news <- Sync[F]
         .delay(doc >> elementList("#site-content section [class=story-wrapper]"))
         .map { result =>
-          result.map(parseContent).collect { case Right(news) => news }
+          result.map(parseContent).collect { case Right(news) if news.title.nonEmpty => news }
         }
     } yield news
   }

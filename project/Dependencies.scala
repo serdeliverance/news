@@ -12,13 +12,15 @@ object Dependencies {
     val scalaScraper        = "2.2.0"
     val catsEffectVersion   = "3.3.9"
     val circeGenericsExtras = "0.14.1"
-    val skunk               = "0.2.3"
     val postgres            = "42.2.11"
     val redis4Cats          = "1.1.1"
     val pureConfig          = "0.17.1"
     val organizeImports     = "0.6.0"
     val sangria             = "3.0.0"
     val sangriaCirce        = "1.3.2"
+    val doobie              = "1.0.0-RC2"
+    val quill               = "3.14.1"
+    val doobieQuill         = "0.0.5"
   }
 
   val http4sEmberServer    = "org.http4s"            %% "http4s-ember-server"    % V.http4sVersion
@@ -31,7 +33,10 @@ object Dependencies {
   val scalaScraper         = "net.ruippeixotog"      %% "scala-scraper"          % V.scalaScraper
   val catsEffect           = "org.typelevel"         %% "cats-effect"            % V.catsEffectVersion
   val circeGenericsExtras  = "io.circe"              %% "circe-generic-extras"   % V.circeGenericsExtras
-  val skunk                = "org.tpolecat"          %% "skunk-core"             % V.skunk
+  val doobieCore           = "org.tpolecat"          %% "doobie-core"            % V.doobie
+  val doobiePostgres       = "org.tpolecat"          %% "doobie-postgres"        % V.doobie
+  val quill                = "io.getquill"           %% "quill-jdbc"             % V.quill
+  val doobieQuill          = "org.polyvariant"       %% "doobie-quill"           % V.doobieQuill
   val postgres             = "org.postgresql"         % "postgresql"             % V.postgres
   val redis4Cats           = "dev.profunktor"        %% "redis4cats-effects"     % V.redis4Cats
   val pureConfig           = "com.github.pureconfig" %% "pureconfig"             % V.pureConfig

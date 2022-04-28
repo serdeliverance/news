@@ -66,9 +66,9 @@ But it is just a matter of style.
 - graphql config with http4s
 - add bulk insert with `Skunk` (refactor to add `Quill` instead)
 - add unit tests
-- add more logs
 
 #### TODO / Improvements
+- add more logs
 - add docker artifact generation
 - add api endpoints versioning
 - improve logging tracking info (nowaways it shows `sdev.Main`, instead of current service classes)

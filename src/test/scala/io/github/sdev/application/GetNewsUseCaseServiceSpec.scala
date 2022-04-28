@@ -24,18 +24,21 @@ class GetNewsUseCaseServiceSpec extends CatsEffectSuite {
   test("getting news from web site") {
     val result = subject.getNews()
 
+    // TODO finish implementation
     assertIO(result, List(News("A new", "https://nytimes.com/a-new"), News("Another new", "https://nytimes.com/another-new")))
   }
 
   test("getting news from cache") {
     val result = subject.getNews()
 
+    // TODO finish implementation
     assertIO(result, List(News("A new", "https://nytimes.com/a-new"), News("Another new", "https://nytimes.com/another-new")))
   }
 
   test("falling getting news from website") {
     val result = subject.getNews()
 
+    // TODO finish implementation
     result.attempt.map {
       case Left(ex)     => assert(ex == ScrapingError)
       case Right(value) => fail("ble")

@@ -83,4 +83,4 @@ But it is just a matter of style.
 - improve logging tracking info (nowaways it shows `sdev.Main`, instead of current service classes)
 - add github actions
 - add scalasteward
-- fix `scalaFix` command`
+- fix `scalaFix` command

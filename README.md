@@ -74,7 +74,7 @@ But it is just a matter of style.
 #### TODO
 
 - `log4cats` is not working since some `sangria` and `quill` stuff was added. It needs some fixes.
-- add error handling and http error codes
+- add error handling and http response codes in case of errors
 
 #### Future Improvements
 - some refactors in [NewsRepositoryImpl](src/main/scala/io/github/sdev/adapter/out/persistence/NewsRepositoryImpl.scala)

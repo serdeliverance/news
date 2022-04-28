@@ -10,6 +10,7 @@ import io.github.sdev.application.ports.out.CacheService
 import org.typelevel.log4cats.slf4j.Slf4jLogger
 import io.github.sdev.domain.entities.News
 import io.github.sdev.stubs.NewsStubs
+import javax.naming.ServiceUnavailableException
 
 class GetNewsUseCaseServiceSpec extends CatsEffectSuite with NewsStubs {
 
@@ -37,17 +38,19 @@ class GetNewsUseCaseServiceSpec extends CatsEffectSuite with NewsStubs {
     val result = subject.getNews()
 
     when(cacheService.getAll()).thenReturn(IO.pure(aListOfNews))
-    // TODO finish implementation
+
     assertIO(result, List(News("A new", "https://nytimes.com/a-new"), News("Another new", "https://nytimes.com/another-new")))
   }
 
   test("falling getting news from website") {
     val result = subject.getNews()
 
-    // TODO finish implementation
+    when(cacheService.getAll()).thenReturn(IO.pure(List.empty))
+    when(scraperService.scrapNews(url)).thenReturn(IO.raiseError(new RuntimeException))
+
     result.attempt.map {
-      case Left(ex)     => assert(ex == new IllegalAccessException)
-      case Right(value) => fail("ble")
+      case Left(ex)     => assert(ex.isInstanceOf[RuntimeException])
+      case Right(value) => fail("assertion fail")
     }
   }
 }

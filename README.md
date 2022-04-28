@@ -72,10 +72,12 @@ But it is just a matter of style.
 
 #### TODO / Improvements
 - add more logs
+- add retry logic if `JSoup` fails
 - add docker artifact generation
+- add kubernetes
+- migrate to `Scala 3`
 - add api endpoints versioning
 - improve logging tracking info (nowaways it shows `sdev.Main`, instead of current service classes)
 - add github actions
-- add kubernetes
 - add scalasteward
-- fix `scalaFix` command
+- fix `scalaFix` command`

@@ -69,7 +69,6 @@ But it is just a matter of style.
 
 #### TODO
 
-- add bulk insert with `Quill`
 - add unit tests
 - add error handling and http error code on that cases
 

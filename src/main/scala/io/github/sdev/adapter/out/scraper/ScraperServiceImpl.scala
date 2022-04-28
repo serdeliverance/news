@@ -10,6 +10,8 @@ import cats.effect.Sync
 import cats.syntax.all._
 import org.typelevel.log4cats.Logger
 
+import io.github.sdev.domain.entities.News
+
 class ScraperServiceImpl[F[_]: Sync: Logger] extends ScraperService[F] {
   // TODO add error handling
   def scrapNews(siteUrl: String): F[List[News]] = {

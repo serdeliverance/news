@@ -3,7 +3,7 @@ package io.github.sdev.application.json
 import io.circe.Decoder
 import io.circe.Encoder
 import io.circe.generic.extras.semiauto._
-import io.github.sdev.scraper.News
+import io.github.sdev.domain.entities.News
 import io.circe.Printer
 import io.circe.generic.extras.Configuration
 

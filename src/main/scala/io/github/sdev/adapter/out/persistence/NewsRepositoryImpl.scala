@@ -2,7 +2,7 @@ package io.github.sdev.adapter.out.persistence
 
 import io.github.sdev.application.ports.out.NewsRepository
 import io.github.sdev.adapter.out.persistence.Ops._
-import io.github.sdev.scraper.News
+import io.github.sdev.domain.entities.News
 
 import cats.effect._
 import skunk._

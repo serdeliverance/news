@@ -1,7 +1,7 @@
 package io.github.sdev.application
 
 import io.github.sdev.domain.usecases.GetNewsUseCase
-import io.github.sdev.scraper.News
+import io.github.sdev.domain.entities.News
 import io.github.sdev.application.ports.out.ScraperService
 import io.github.sdev.application.ports.out.CacheService
 import io.github.sdev.application.ports.out.NewsRepository

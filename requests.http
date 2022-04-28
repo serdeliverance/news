@@ -6,5 +6,5 @@ POST http://localhost:8080/graphql HTTP/1.1
 content-type: application/json
 
 {
-    "query": "{ news { title, link } }"
+    "query": "{ news { title } }"
 }

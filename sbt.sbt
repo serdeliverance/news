@@ -10,6 +10,8 @@ Test / parallelExecution := false
 
 ThisBuild / includePluginResolvers := true
 
+ThisBuild / scalacOptions ++= Seq("-unchecked", "-deprecation")
+
 ThisBuild / watchBeforeCommand           := Watch.clearScreen
 ThisBuild / watchTriggeredMessage        := Watch.clearScreenOnTrigger
 ThisBuild / watchForceTriggerOnAnyChange := true

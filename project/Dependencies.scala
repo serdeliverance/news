@@ -17,6 +17,8 @@ object Dependencies {
     val redis4Cats          = "1.1.1"
     val pureConfig          = "0.17.1"
     val organizeImports     = "0.6.0"
+    val sangria             = "3.0.0"
+    val sangriaCirce        = "1.3.2"
   }
 
   val http4sEmberServer    = "org.http4s"            %% "http4s-ember-server"    % V.http4sVersion
@@ -25,6 +27,7 @@ object Dependencies {
   val circeCore            = "io.circe"              %% "circe-core"             % V.circeVersion
   val circeParser          = "io.circe"              %% "circe-parser"           % V.circeVersion
   val circeGeneric         = "io.circe"              %% "circe-generic"          % V.circeVersion
+  val circeOptics          = "io.circe"              %% "circe-optics"           % V.circeVersion
   val scalaScraper         = "net.ruippeixotog"      %% "scala-scraper"          % V.scalaScraper
   val catsEffect           = "org.typelevel"         %% "cats-effect"            % V.catsEffectVersion
   val circeGenericsExtras  = "io.circe"              %% "circe-generic-extras"   % V.circeGenericsExtras
@@ -34,6 +37,8 @@ object Dependencies {
   val pureConfig           = "com.github.pureconfig" %% "pureconfig"             % V.pureConfig
   val pureConfigCatsEffect = "com.github.pureconfig" %% "pureconfig-cats-effect" % V.pureConfig
   val organizeImports      = "com.github.liancheng"  %% "organize-imports"       % V.organizeImports
+  val sangria              = "org.sangria-graphql"   %% "sangria"                % V.sangria
+  val sangriaCirce         = "org.sangria-graphql"   %% "sangria-circe"          % V.sangriaCirce
 
   val munit            = "org.scalameta" %% "munit"               % V.munitVersion
   val munitCatsEffect3 = "org.typelevel" %% "munit-cats-effect-3" % V.munitCatsEffect

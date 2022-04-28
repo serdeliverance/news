@@ -44,6 +44,10 @@ Also, you can visualize the data stored in the db checking out the `Adminer`, wh
 
 The endpoints exposed by the `API` are on [this file](requests.http)
 
+## Testing
+
+Just the `application` layer [was tested](src/test/scala/io/github/sdev/application/GetNewsUseCaseServiceSpec.scala) via `unit test`. Maybe, some `it tests` could be made using `Test Containers` as an improvement of the `test coverage`.
+
 ## Some words about Styling
 
 I tried to use `Hexagonal Architecture` in an `OOP` way but because of habit. For example, the following snippet:
@@ -70,7 +74,6 @@ But it is just a matter of style.
 #### TODO
 
 - `log4cats` is not working since some `sangria` and `quill` stuff was added. It needs some fixes.
-- add unit tests
 - add error handling and http error codes
 
 #### Future Improvements

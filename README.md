@@ -5,7 +5,7 @@ The objetive of this app is to expose an `API` that retrieves info from [The NyT
 ## Stack
 
 - `Scala`
-- `Cats Effect` (`Http4s`, `Fs2`, `Redis4Cats`, `PureConfig`)
+- `Cats Effect` (`Http4s`, `Doobie`, `Redis4Cats`, `PureConfig`)
 - `Sangria`
 - `Quill`
 - `Postgres`
@@ -36,7 +36,9 @@ docker-compose up
 sbt run
 ```
 
-It will startup the app on `localhost:8080`
+It will startup the app on `localhost:8080`.
+
+Also, you can visualize the data stored in the db checking out the `Adminer`, who is running on `localhost:8083`.
 
 ## Endpoints
 

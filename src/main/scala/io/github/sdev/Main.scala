@@ -78,7 +78,7 @@ object Main extends IOApp {
       )
       graphQL <- Resource.eval(
         new SangriaGraphQL(
-          Schema(query = QueryType[F]()),
+          Schema(query = QueryType[F](dispatcher)),
           new NewsDeferredResolver[F](dispatcher),
           getNewsUseCaseService.pure[F]
         ).pure[F]

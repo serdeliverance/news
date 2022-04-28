@@ -5,7 +5,7 @@ The objetive of this app is to expose an `API` that retrieves info from [The NyT
 ## Stack
 
 - `Scala`
-- `Cats Effect` (`Fs2`, `Redis4Cats`)
+- `Cats Effect` (`Http4s`, `Fs2`, `Redis4Cats`, `PureConfig`)
 - `Sangria`
 - `Quill`
 - `Postgres`

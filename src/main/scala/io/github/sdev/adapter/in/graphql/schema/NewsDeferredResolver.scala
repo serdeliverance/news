@@ -14,5 +14,5 @@ class NewsDeferredResolver[F[_]](dispatcher: Dispatcher[F]) extends DeferredReso
   override def resolve(deferred: Vector[Deferred[Any]], ctx: GetNewsUseCaseService[F], queryState: Any)(implicit
       ec: ExecutionContext
   ): Vector[Future[Any]] =
-    Vector(dispatcher.unsafeToFuture(ctx.getNews())) // TODO check if works
+    Vector(dispatcher.unsafeToFuture(ctx.getNews()))
 }

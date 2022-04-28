@@ -22,6 +22,7 @@ lazy val dependencies = libraryDependencies ++= Seq(
   scalaScraper,
   doobieCore,
   doobiePostgres,
+  doobieHickari,
   quill,
   doobieQuill,
   postgres,

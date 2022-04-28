@@ -10,17 +10,15 @@ object Config {
       redis: RedisConfig,
       cache: CacheConfig,
       server: ServerConfig,
-      scraper: ScraperConfig,
-    )
+      scraper: ScraperConfig
+  )
 
   case class DbConfig(
-      host: String,
-      port: Int,
+      driver: String,
+      url: String,
       user: String,
-      password: String,
-      database: String,
-      maxSessions: Int,
-    )
+      password: String
+  )
   case class RedisConfig(url: String)
   case class CacheConfig(ttl: FiniteDuration)
   case class ServerConfig(host: String, port: Int)

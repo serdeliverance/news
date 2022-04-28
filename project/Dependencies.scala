@@ -35,6 +35,7 @@ object Dependencies {
   val circeGenericsExtras  = "io.circe"              %% "circe-generic-extras"   % V.circeGenericsExtras
   val doobieCore           = "org.tpolecat"          %% "doobie-core"            % V.doobie
   val doobiePostgres       = "org.tpolecat"          %% "doobie-postgres"        % V.doobie
+  val doobieHickari        = "org.tpolecat"          %% "doobie-hikari"          % V.doobie
   val quill                = "io.getquill"           %% "quill-jdbc"             % V.quill
   val doobieQuill          = "org.polyvariant"       %% "doobie-quill"           % V.doobieQuill
   val postgres             = "org.postgresql"         % "postgresql"             % V.postgres

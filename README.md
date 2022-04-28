@@ -52,7 +52,7 @@ class CacheServiceImpl[F[_]: Logger](redisCommands: RedisCommands[F, String, Str
 }
 ```
 
-Could be implemented in a more `Scala FP` way:
+Is used instead of a more `value` oriented `Scala FP approach` like the following:
 
 ``` scala
 object CacheService {
@@ -72,6 +72,8 @@ But it is just a matter of style.
 - add error handling and http error code on that cases
 
 #### TODO / Improvements
+- some refactors in [NewsRepositoryImpl](src/main/scala/io/github/sdev/adapter/out/persistence/NewsRepositoryImpl.scala)
+- removing warning related with versions of `log4j` versions
 - add more logs
 - add docker artifact generation
 - add kubernetes

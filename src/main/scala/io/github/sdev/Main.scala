@@ -20,10 +20,6 @@ import io.github.sdev.adapter.out.cache.CacheServiceImpl
 import io.github.sdev.adapter.out.cache.CacheConfig
 import cats.effect.{ Async, Resource }
 import cats.effect.std.{ Console, Dispatcher }
-import skunk._
-import skunk.implicits._
-import skunk.codec.all._
-import natchez.Trace.Implicits.noop
 import cats.effect.std
 import dev.profunktor.redis4cats.connection.RedisClient
 import dev.profunktor.redis4cats.Redis
@@ -44,6 +40,9 @@ import io.github.sdev.adapter.in.graphql.schema.QueryType
 import scala.concurrent.ExecutionContext
 import java.util.concurrent.Executors
 import io.github.sdev.adapter.in.graphql.GraphQLRoutes
+import doobie.util.ExecutionContexts
+import doobie.util.transactor.Transactor
+import doobie.hikari._
 
 object Main extends IOApp {
 
@@ -56,20 +55,20 @@ object Main extends IOApp {
 
     for {
       config <- Resource.eval(ConfigSource.default.loadF[F, Config.AppConfig]())
-      sessions <- Session
-        .pooled[F](
-          host = config.db.host,
-          port = config.db.port,
-          user = config.db.user,
-          database = config.db.database,
-          password = config.db.password.pure[Option],
-          max = config.db.maxSessions
+      connEc <- ExecutionContexts.fixedThreadPool[F](32)
+      xa <-
+        HikariTransactor.newHikariTransactor(
+          config.db.driver,
+          config.db.url,
+          config.db.user,
+          config.db.password,
+          connEc
         )
       redisCommands <- Redis[F].utf8(config.redis.url)
       dispatcher    <- Dispatcher[F]
       cacheConfig    = CacheConfig(config.cache.ttl)
       scraperService = new ScraperServiceImpl[F]
-      newsRepository = new NewsRepositoryImpl[F](sessions)
+      newsRepository = new NewsRepositoryImpl[F](xa)
       cacheService   = new CacheServiceImpl[F](redisCommands, cacheConfig)
       getNewsUseCaseService = new GetNewsUseCaseService[F](
         scraperService,

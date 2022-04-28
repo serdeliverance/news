@@ -31,10 +31,12 @@ lazy val dependencies = libraryDependencies ++= Seq(
   pureConfigCatsEffect,
   sangria,
   sangriaCirce,
-  munit            % Test,
-  munitCatsEffect3 % Test,
   log4cats,
-  logbackClassic % Runtime
+  logbackClassic   % Runtime,
+  mockitoCore      % Test,
+  mockitoScala     % Test,
+  munit            % Test,
+  munitCatsEffect3 % Test
 )
 
 testFrameworks += TestFramework("munit.Framework")

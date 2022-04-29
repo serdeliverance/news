@@ -10,7 +10,6 @@ import io.github.sdev.application.ports.out.CacheService
 import org.typelevel.log4cats.slf4j.Slf4jLogger
 import io.github.sdev.domain.entities.News
 import io.github.sdev.stubs.NewsStubs
-import javax.naming.ServiceUnavailableException
 
 class GetNewsUseCaseServiceSpec extends CatsEffectSuite with NewsStubs {
 

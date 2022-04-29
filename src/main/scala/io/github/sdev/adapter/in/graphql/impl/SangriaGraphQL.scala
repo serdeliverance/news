@@ -3,7 +3,6 @@ package io.github.sdev.adapter.in.graphql.impl
 import io.github.sdev.adapter.in.graphql.GraphQL
 import io.circe.Json
 import io.circe.JsonObject
-import io.circe.optics.JsonPath.root
 import cats.syntax.all._
 import cats.Applicative
 import sangria.parser.QueryParser
@@ -11,11 +10,9 @@ import scala.util.Failure
 import scala.util.Success
 import sangria.parser.SyntaxError
 import sangria.execution.deferred.DeferredResolver
-import scala.concurrent.ExecutionContext
 import sangria.schema.Schema
 import sangria.ast.Document
 import sangria.execution.WithViolations
-import sangria.validation.AstNodeViolation
 import Util.Formatter._
 import Util.JsonParsing._
 import sangria.execution.HandledException

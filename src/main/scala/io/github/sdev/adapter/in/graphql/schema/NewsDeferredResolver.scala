@@ -1,8 +1,5 @@
 package io.github.sdev.adapter.in.graphql.schema
 
-import cats.effect.implicits._
-import cats.effect._
-import cats.implicits._
 import sangria.execution.deferred.DeferredResolver
 import io.github.sdev.application.GetNewsUseCaseService
 import sangria.execution.deferred.Deferred

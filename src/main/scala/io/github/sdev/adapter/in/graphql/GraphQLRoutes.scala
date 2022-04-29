@@ -2,7 +2,6 @@ package io.github.sdev.adapter.in.graphql
 
 import cats.effect._
 import cats.implicits._
-import io.circe.Json
 import org.http4s.circe._
 import org.http4s._
 import org.http4s.dsl._

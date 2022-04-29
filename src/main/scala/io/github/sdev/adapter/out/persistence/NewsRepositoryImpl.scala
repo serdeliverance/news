@@ -1,24 +1,18 @@
 package io.github.sdev.adapter.out.persistence
 
 import io.github.sdev.application.ports.out.NewsRepository
-import io.github.sdev.adapter.out.persistence.Ops._
 import io.github.sdev.domain.entities.News
 
 import cats.effect._
 import io.github.sdev.adapter.out.persistence.models.NewsEntity
-import cats.effect.kernel.Resource
-import cats.syntax.all._
 import cats.effect.syntax.all._
 import cats.syntax.all._
 import org.polyvariant.doobiequill.DoobieContext
-import doobie._
 import doobie.implicits._
-import io.getquill.{ idiom => _, _ }
+import io.getquill.{ idiom => _ }
 import io.getquill._
 import doobie.util.transactor.Transactor
-import cats.Applicative
 import Ops.NewsOps
-import io.getquill.quotation.QuotedAst
 
 class NewsRepositoryImpl[F[_]](xa: Transactor[F])(implicit F: MonadCancel[F, Throwable]) extends NewsRepository[F] {
 

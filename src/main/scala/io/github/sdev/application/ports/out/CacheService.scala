@@ -1,6 +1,5 @@
 package io.github.sdev.application.ports.out
 
-import cats.effect.IO
 import io.github.sdev.domain.entities.News
 
 trait CacheService[F[_]] {

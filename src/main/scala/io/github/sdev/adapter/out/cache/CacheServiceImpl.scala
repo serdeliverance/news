@@ -2,10 +2,6 @@ package io.github.sdev.adapter.out.cache
 
 import io.github.sdev.application.ports.out.CacheService
 import io.github.sdev.domain.entities.News
-import cats.effect.kernel.Resource
-import dev.profunktor.redis4cats.algebra.StringCommands
-import dev.profunktor.redis4cats.effects.SetArgs._
-import dev.profunktor.redis4cats.effects.SetArg.Ttl.Px
 import dev.profunktor.redis4cats.effects
 import cats.effect.kernel.MonadCancel
 import cats.syntax.all._

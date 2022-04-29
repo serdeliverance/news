@@ -8,7 +8,6 @@ import io.github.sdev.application.ports.out.NewsRepository
 
 import cats.syntax.all._
 import cats.Monad
-import cats.effect.IO
 import cats.Applicative
 import org.typelevel.log4cats.Logger
 

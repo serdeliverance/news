@@ -77,15 +77,15 @@ But it is just a matter of style.
 - add error handling and http response codes in case of errors
 
 #### Future Improvements
+- add scalafix
+- add scalasteward
+- add github actions
+- migrate to `Scala 3`
 - some refactors in [NewsRepositoryImpl](src/main/scala/io/github/sdev/adapter/out/persistence/NewsRepositoryImpl.scala)
 - removing warning related with versions of `log4j` versions
 - add more logs
 - add integration tests with test containers
 - add docker artifact generation
 - add kubernetes
-- migrate to `Scala 3`
 - add api endpoints versioning
 - improve logging tracking info (nowaways it shows `sdev.Main`, instead of current service classes)
-- add github actions
-- add scalasteward
-- fix `scalaFix` command

@@ -89,3 +89,4 @@ But it is just a matter of style.
 - add kubernetes
 - add api endpoints versioning
 - improve logging tracking info (nowaways it shows `sdev.Main`, instead of current service classes)
+- remove `sangria` and start using `caliban` instead

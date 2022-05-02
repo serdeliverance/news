@@ -2,7 +2,7 @@ package io.github.sdev.application.json
 
 import io.circe.generic.extras.Configuration
 import io.circe.generic.extras.semiauto._
-import io.circe.{Decoder, Encoder, Printer}
+import io.circe.{ Decoder, Encoder, Printer }
 import io.github.sdev.domain.entities.News
 
 object SerDes {

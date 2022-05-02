@@ -1,7 +1,7 @@
 package io.github.sdev.application
 
 import cats.effect.IO
-import io.github.sdev.application.ports.out.{CacheService, NewsRepository, ScraperService}
+import io.github.sdev.application.ports.out.{ CacheService, NewsRepository, ScraperService }
 import io.github.sdev.domain.entities.News
 import io.github.sdev.stubs.NewsStubs
 import munit.CatsEffectSuite

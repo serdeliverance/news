@@ -12,9 +12,9 @@ import doobie.hikari._
 import doobie.util.ExecutionContexts
 import io.github.sdev.adapter.in.graphql.GraphQLRoutes
 import io.github.sdev.adapter.in.graphql.impl.SangriaGraphQL
-import io.github.sdev.adapter.in.graphql.schema.{NewsDeferredResolver, QueryType}
+import io.github.sdev.adapter.in.graphql.schema.{ NewsDeferredResolver, QueryType }
 import io.github.sdev.adapter.in.rest.NewsRoutes
-import io.github.sdev.adapter.out.cache.{CacheConfig, CacheServiceImpl}
+import io.github.sdev.adapter.out.cache.{ CacheConfig, CacheServiceImpl }
 import io.github.sdev.adapter.out.persistence.NewsRepositoryImpl
 import io.github.sdev.application.GetNewsUseCaseService
 import io.github.sdev.application.config.Config

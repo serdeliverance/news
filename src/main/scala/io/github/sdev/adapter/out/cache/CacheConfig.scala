@@ -4,7 +4,6 @@ import scala.concurrent.duration.FiniteDuration
 
 import dev.profunktor.redis4cats.effects
 
-
 case class CacheConfig(ttl: effects.SetArg.Ttl.Px)
 
 object CacheConfig {

@@ -2,7 +2,7 @@ package io.github.sdev.adapter.out.cache
 
 import cats.effect.kernel.MonadCancel
 import cats.syntax.all._
-import dev.profunktor.redis4cats.{RedisCommands, effects}
+import dev.profunktor.redis4cats.{ RedisCommands, effects }
 import io.circe.parser.decode
 import io.circe.syntax._
 import io.github.sdev.application.json.SerDes._

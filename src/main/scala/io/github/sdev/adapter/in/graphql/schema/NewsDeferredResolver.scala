@@ -4,7 +4,7 @@ import scala.concurrent.{ ExecutionContext, Future }
 
 import cats.effect.std.Dispatcher
 import io.github.sdev.application.GetNewsUseCaseService
-import sangria.execution.deferred.{Deferred, DeferredResolver}
+import sangria.execution.deferred.{ Deferred, DeferredResolver }
 
 class NewsDeferredResolver[F[_]](dispatcher: Dispatcher[F]) extends DeferredResolver[GetNewsUseCaseService[F]] {
 

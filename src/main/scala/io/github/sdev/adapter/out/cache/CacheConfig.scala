@@ -1,6 +1,7 @@
 package io.github.sdev.adapter.out.cache
 
 import scala.concurrent.duration.FiniteDuration
+
 import dev.profunktor.redis4cats.effects
 
 

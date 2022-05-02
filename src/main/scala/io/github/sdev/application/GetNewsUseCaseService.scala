@@ -1,14 +1,10 @@
 package io.github.sdev.application
 
-import io.github.sdev.domain.usecases.GetNewsUseCase
-import io.github.sdev.domain.entities.News
-import io.github.sdev.application.ports.out.ScraperService
-import io.github.sdev.application.ports.out.CacheService
-import io.github.sdev.application.ports.out.NewsRepository
-
 import cats.syntax.all._
-import cats.Monad
-import cats.Applicative
+import cats.{Applicative, Monad}
+import io.github.sdev.application.ports.out.{CacheService, NewsRepository, ScraperService}
+import io.github.sdev.domain.entities.News
+import io.github.sdev.domain.usecases.GetNewsUseCase
 import org.typelevel.log4cats.Logger
 
 class GetNewsUseCaseService[F[_]: Monad: Applicative: Logger](

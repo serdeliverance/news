@@ -1,11 +1,9 @@
 package io.github.sdev.application.json
 
-import io.circe.Decoder
-import io.circe.Encoder
-import io.circe.generic.extras.semiauto._
-import io.github.sdev.domain.entities.News
-import io.circe.Printer
 import io.circe.generic.extras.Configuration
+import io.circe.generic.extras.semiauto._
+import io.circe.{Decoder, Encoder, Printer}
+import io.github.sdev.domain.entities.News
 
 object SerDes {
   implicit val customPrinter: Printer      = Printer.noSpaces.copy(dropNullValues = true)

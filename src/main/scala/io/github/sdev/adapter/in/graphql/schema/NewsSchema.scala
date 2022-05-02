@@ -1,8 +1,8 @@
 package io.github.sdev.adapter.in.graphql.schema
 
-import sangria.schema._
-import io.github.sdev.domain.entities.News
 import io.github.sdev.application.GetNewsUseCaseService
+import io.github.sdev.domain.entities.News
+import sangria.schema._
 
 object NewsSchema {
 

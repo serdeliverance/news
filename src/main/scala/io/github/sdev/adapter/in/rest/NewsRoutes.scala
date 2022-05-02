@@ -1,11 +1,11 @@
 package io.github.sdev.adapter.in.rest
 
-import org.http4s.HttpRoutes
-import org.http4s.dsl.Http4sDsl
 import cats.effect.Sync
 import io.github.sdev.application.GetNewsUseCaseService
-import org.http4s.circe.CirceEntityEncoder._
 import io.github.sdev.application.json.SerDes.newsEncoder
+import org.http4s.HttpRoutes
+import org.http4s.circe.CirceEntityEncoder._
+import org.http4s.dsl.Http4sDsl
 
 object NewsRoutes {
 

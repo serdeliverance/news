@@ -1,15 +1,14 @@
 package io.github.sdev.adapter.out.cache
 
-import io.github.sdev.application.ports.out.CacheService
-import io.github.sdev.domain.entities.News
-import dev.profunktor.redis4cats.effects
 import cats.effect.kernel.MonadCancel
 import cats.syntax.all._
-import dev.profunktor.redis4cats.RedisCommands
-import org.typelevel.log4cats.Logger
-import io.github.sdev.application.json.SerDes._
-import io.circe.syntax._
+import dev.profunktor.redis4cats.{RedisCommands, effects}
 import io.circe.parser.decode
+import io.circe.syntax._
+import io.github.sdev.application.json.SerDes._
+import io.github.sdev.application.ports.out.CacheService
+import io.github.sdev.domain.entities.News
+import org.typelevel.log4cats.Logger
 
 class CacheServiceImpl[F[_]: Logger](redisCommands: RedisCommands[F, String, String], config: CacheConfig)(implicit
     F: MonadCancel[F, Throwable]

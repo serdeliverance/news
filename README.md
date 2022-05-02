@@ -78,7 +78,6 @@ But it is just a matter of style.
 
 #### Future Improvements
 - add scalafix
-- add scalasteward
 - add github actions
 - migrate to `Scala 3`
 - some refactors in [NewsRepositoryImpl](src/main/scala/io/github/sdev/adapter/out/persistence/NewsRepositoryImpl.scala)

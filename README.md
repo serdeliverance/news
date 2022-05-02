@@ -77,9 +77,9 @@ But it is just a matter of style.
 - add error handling and http response codes in case of errors
 
 #### Future Improvements
-- add scalafix
-- add github actions
+- group .sbt files (ex: `sbt`, `scalac`, `scalafix` and `aliases`)
 - migrate to `Scala 3`
+- add github actions
 - some refactors in [NewsRepositoryImpl](src/main/scala/io/github/sdev/adapter/out/persistence/NewsRepositoryImpl.scala)
 - removing warning related with versions of `log4j` versions
 - add more logs

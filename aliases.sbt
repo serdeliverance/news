@@ -9,6 +9,7 @@ addCommandAlias("ca", "Test / compile")
 addCommandAlias("t", "test")
 addCommandAlias("r", "run")
 addCommandAlias("runLinter", ";scalafixAll --rules OrganizeImports")
+addCommandAlias("up2date", ";dependencyUpdates")
 
 onLoadMessage +=
   s"""|

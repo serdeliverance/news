@@ -1,40 +1,33 @@
 package example.io.github.sdev
 
-import cats.effect.IOApp
-import cats.effect.ExitCode
-
+import cats.effect._
+import cats.effect.std.{ Console, Dispatcher }
+import cats.syntax.all._
+import com.comcast.ip4s._
+import dev.profunktor.redis4cats
+import dev.profunktor.redis4cats.Redis
+import dev.profunktor.redis4cats.data.RedisCodec
+import dev.profunktor.redis4cats.effect.Log.Stdout._
+import doobie.hikari._
+import doobie.util.ExecutionContexts
+import io.github.sdev.adapter.in.graphql.GraphQLRoutes
+import io.github.sdev.adapter.in.graphql.impl.SangriaGraphQL
+import io.github.sdev.adapter.in.graphql.schema.{ NewsDeferredResolver, QueryType }
+import io.github.sdev.adapter.in.rest.NewsRoutes
+import io.github.sdev.adapter.out.cache.{ CacheConfig, CacheServiceImpl }
+import io.github.sdev.adapter.out.persistence.NewsRepositoryImpl
+import io.github.sdev.application.GetNewsUseCaseService
+import io.github.sdev.application.config.Config
+import io.github.sdev.scraper.ScraperServiceImpl
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.implicits._
 import org.http4s.server.middleware.{ Logger => HttpLogger }
-import cats.syntax.all._
-import com.comcast.ip4s._
-
-import io.github.sdev.adapter.in.rest.NewsRoutes
-import io.github.sdev.application.GetNewsUseCaseService
-import io.github.sdev.scraper.ScraperServiceImpl
-import io.github.sdev.adapter.out.persistence.NewsRepositoryImpl
-import io.github.sdev.adapter.out.cache.CacheServiceImpl
-import io.github.sdev.adapter.out.cache.CacheConfig
-import cats.effect.{ Async, Resource }
-import cats.effect.std.{ Console, Dispatcher }
-import dev.profunktor.redis4cats.Redis
-import dev.profunktor.redis4cats
-import dev.profunktor.redis4cats.data.RedisCodec
-import org.typelevel.log4cats.slf4j.Slf4jLogger
 import org.typelevel.log4cats.Logger
-import cats.effect.IO
-import dev.profunktor.redis4cats.effect.Log.Stdout._
+import org.typelevel.log4cats.slf4j.Slf4jLogger
 import pureconfig.ConfigSource
 import pureconfig.generic.auto._
 import pureconfig.module.catseffect.syntax._
-import io.github.sdev.application.config.Config
-import io.github.sdev.adapter.in.graphql.impl.SangriaGraphQL
-import io.github.sdev.adapter.in.graphql.schema.NewsDeferredResolver
 import sangria.schema.Schema
-import io.github.sdev.adapter.in.graphql.schema.QueryType
-import io.github.sdev.adapter.in.graphql.GraphQLRoutes
-import doobie.util.ExecutionContexts
-import doobie.hikari._
 
 object Main extends IOApp {
 

@@ -1,9 +1,9 @@
 package io.github.sdev.adapter.in.graphql.schema
 
-import sangria.schema._
-import io.github.sdev.application.GetNewsUseCaseService
 import cats.effect.Async
 import cats.effect.std.Dispatcher
+import io.github.sdev.application.GetNewsUseCaseService
+import sangria.schema._
 
 object QueryType {
 

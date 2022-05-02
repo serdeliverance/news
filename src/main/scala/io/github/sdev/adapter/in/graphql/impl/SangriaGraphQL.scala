@@ -1,24 +1,22 @@
 package io.github.sdev.adapter.in.graphql.impl
 
-import io.github.sdev.adapter.in.graphql.GraphQL
-import io.circe.Json
-import io.circe.JsonObject
-import cats.syntax.all._
-import cats.Applicative
-import sangria.parser.QueryParser
-import scala.util.Failure
-import scala.util.Success
-import sangria.parser.SyntaxError
-import sangria.execution.deferred.DeferredResolver
-import sangria.schema.Schema
-import sangria.ast.Document
-import sangria.execution.WithViolations
-import Util.Formatter._
-import Util.JsonParsing._
-import sangria.execution.HandledException
+import scala.util.{ Failure, Success }
+
 import _root_.sangria.execution._
 import _root_.sangria.marshalling.circe._
+import cats.Applicative
 import cats.effect.Async
+import cats.syntax.all._
+import io.circe.{ Json, JsonObject }
+import io.github.sdev.adapter.in.graphql.GraphQL
+import sangria.ast.Document
+import sangria.execution.deferred.DeferredResolver
+import sangria.execution.{ HandledException, WithViolations }
+import sangria.parser.{ QueryParser, SyntaxError }
+import sangria.schema.Schema
+
+import Util.Formatter._
+import Util.JsonParsing._
 
 class SangriaGraphQL[F[_]: Async: Applicative, A](
     schema: Schema[A, Unit],

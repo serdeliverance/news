@@ -1,10 +1,10 @@
 package io.github.sdev.adapter.in.graphql.schema
 
-import sangria.execution.deferred.DeferredResolver
-import io.github.sdev.application.GetNewsUseCaseService
-import sangria.execution.deferred.Deferred
 import scala.concurrent.{ ExecutionContext, Future }
+
 import cats.effect.std.Dispatcher
+import io.github.sdev.application.GetNewsUseCaseService
+import sangria.execution.deferred.{ Deferred, DeferredResolver }
 
 class NewsDeferredResolver[F[_]](dispatcher: Dispatcher[F]) extends DeferredResolver[GetNewsUseCaseService[F]] {
 

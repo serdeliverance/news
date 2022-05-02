@@ -8,16 +8,8 @@ addCommandAlias("c", "compile")
 addCommandAlias("ca", "Test / compile")
 addCommandAlias("t", "test")
 addCommandAlias("r", "run")
-addCommandAlias("rs", "reStart")
-addCommandAlias("s", "reStop")
-addCommandAlias(
-  "styleCheck",
-  "scalafmtSbtCheck; scalafmtCheckAll; Test / compile; scalafixAll --check",
-)
-addCommandAlias(
-  "styleFix",
-  "Test / compile; scalafixAll; scalafmtSbt; scalafmtAll",
-)
+addCommandAlias("runLinter", ";scalafixAll --rules OrganizeImports")
+addCommandAlias("up2date", ";dependencyUpdates")
 
 onLoadMessage +=
   s"""|
@@ -30,8 +22,5 @@ onLoadMessage +=
       |│ ${styled("ca")}          │ compile all       │
       |│ ${styled("t")}           │ test              │
       |│ ${styled("r")}           │ run               │
-      |│ ${styled("rs")}          │ reStart           │
-      |│ ${styled("s")}           │ reStop            │
-      |│ ${styled("styleCheck")}  │ fmt & fix checks  │
-      |│ ${styled("styleFix")}    │ fix then fmt      │
+      |│ ${styled("runLinter")}   │ fmt & fix checks  │
       |╰─────────────┴───────────────────╯""".stripMargin

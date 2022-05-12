@@ -24,29 +24,29 @@ class GetNewsUseCaseServiceSpec extends CatsEffectSuite with NewsStubs {
   private val subject = new GetNewsUseCaseService[IO](scraperService, newsRepository, cacheService, url)
 
   test("getting news from web site") {
-    val result = subject.getNews()
-
     when(cacheService.getAll()).thenReturn(IO.pure(List.empty))
     when(scraperService.scrapNews(url)).thenReturn(IO.pure(aListOfNews))
     when(newsRepository.save(aListOfNews)).thenReturn(IO.unit)
     when(cacheService.save(aListOfNews)).thenReturn(IO.unit)
 
+    val result = subject.getNews()
+
     assertIO(result, List(News("A new", "https://nytimes.com/a-new"), News("Another new", "https://nytimes.com/another-new")))
   }
 
   test("getting news from cache") {
-    val result = subject.getNews()
-
     when(cacheService.getAll()).thenReturn(IO.pure(aListOfNews))
+
+    val result = subject.getNews()
 
     assertIO(result, List(News("A new", "https://nytimes.com/a-new"), News("Another new", "https://nytimes.com/another-new")))
   }
 
   test("falling getting news from website") {
-    val result = subject.getNews()
-
     when(cacheService.getAll()).thenReturn(IO.pure(List.empty))
     when(scraperService.scrapNews(url)).thenReturn(IO.raiseError(new RuntimeException))
+
+    val result = subject.getNews()
 
     result.attempt.map {
       case Left(ex)     => assert(ex.isInstanceOf[RuntimeException])

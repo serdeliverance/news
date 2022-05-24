@@ -4,10 +4,10 @@ import cats.syntax.all._
 import cats.{ Applicative, Monad }
 import io.github.sdev.application.ports.out.{ CacheService, NewsRepository, ScraperService }
 import io.github.sdev.domain.entities.News
-import io.github.sdev.domain.usecases.GetNewsUseCase
 import org.typelevel.log4cats.Logger
+import io.github.sdev.application.ports.in.GetNewsUseCase
 
-class GetNewsUseCaseService[F[_]: Monad: Applicative: Logger](
+class GetNewsService[F[_]: Monad: Applicative: Logger](
     scraperService: ScraperService[F],
     newsRepository: NewsRepository[F],
     cache: CacheService[F],

@@ -16,7 +16,7 @@ import io.github.sdev.adapter.in.graphql.schema.{ NewsDeferredResolver, QueryTyp
 import io.github.sdev.adapter.in.rest.NewsRoutes
 import io.github.sdev.adapter.out.cache.{ CacheConfig, CacheServiceImpl }
 import io.github.sdev.adapter.out.persistence.NewsRepositoryImpl
-import io.github.sdev.application.GetNewsUseCaseService
+import io.github.sdev.application.GetNewsService
 import io.github.sdev.application.config.Config
 import io.github.sdev.scraper.ScraperServiceImpl
 import org.http4s.ember.server.EmberServerBuilder
@@ -55,7 +55,7 @@ object Main extends IOApp {
       scraperService = new ScraperServiceImpl[F]
       newsRepository = new NewsRepositoryImpl[F](xa)
       cacheService   = new CacheServiceImpl[F](redisCommands, cacheConfig)
-      getNewsUseCaseService = new GetNewsUseCaseService[F](
+      getNewsUseCase = new GetNewsService[F](
         scraperService,
         newsRepository,
         cacheService,
@@ -65,11 +65,11 @@ object Main extends IOApp {
         new SangriaGraphQL(
           Schema(query = QueryType[F](dispatcher)),
           new NewsDeferredResolver[F](dispatcher),
-          getNewsUseCaseService.pure[F]
+          getNewsUseCase.pure[F]
         ).pure[F]
       )
       httpApp = (
-        NewsRoutes.endpoints[F](getNewsUseCaseService) <+> GraphQLRoutes[F](graphQL)
+        NewsRoutes.endpoints[F](getNewsUseCase) <+> GraphQLRoutes[F](graphQL)
       ).orNotFound
       finalHttpApp = HttpLogger.httpApp(true, true)(httpApp)
       server <-

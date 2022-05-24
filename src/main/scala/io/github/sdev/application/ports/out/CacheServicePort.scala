@@ -2,9 +2,8 @@ package io.github.sdev.application.ports.out
 
 import io.github.sdev.domain.entities.News
 
-trait NewsRepository[F[_]] {
-
-  def save(news: News): F[Unit]
+trait CacheServicePort[F[_]] {
+  def getAll(): F[List[News]]
 
   def save(news: List[News]): F[Unit]
 }

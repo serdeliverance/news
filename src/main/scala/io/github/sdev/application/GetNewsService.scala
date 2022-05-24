@@ -2,15 +2,15 @@ package io.github.sdev.application
 
 import cats.syntax.all._
 import cats.{ Applicative, Monad }
-import io.github.sdev.application.ports.out.{ CacheService, NewsRepository, ScraperService }
+import io.github.sdev.application.ports.out.{ CacheServicePort, NewsRepositoryPort, ScraperServicePort }
 import io.github.sdev.domain.entities.News
 import org.typelevel.log4cats.Logger
 import io.github.sdev.application.ports.in.GetNewsUseCase
 
 class GetNewsService[F[_]: Monad: Applicative: Logger](
-    scraperService: ScraperService[F],
-    newsRepository: NewsRepository[F],
-    cache: CacheService[F],
+    scraperService: ScraperServicePort[F],
+    newsRepository: NewsRepositoryPort[F],
+    cache: CacheServicePort[F],
     url: String
 ) extends GetNewsUseCase[F] {
   override def getNews(): F[List[News]] =

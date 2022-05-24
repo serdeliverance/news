@@ -61,13 +61,12 @@ object Main extends IOApp {
         cacheService,
         config.scraper.url
       )
-      graphQL <- Resource.eval(
+      graphQL =
         new SangriaGraphQL(
           Schema(query = QueryType[F](dispatcher)),
           new NewsDeferredResolver[F](dispatcher),
-          getNewsUseCase.pure[F]
-        ).pure[F]
-      )
+          getNewsUseCase.pure[F] // FIXME problems with .pure type inference
+        )
       httpApp = (
         NewsRoutes.endpoints[F](getNewsUseCase) <+> GraphQLRoutes[F](graphQL)
       ).orNotFound

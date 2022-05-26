@@ -52,9 +52,9 @@ object Main extends IOApp {
       redisCommands <- Redis[F].utf8(config.redis.url)
       dispatcher    <- Dispatcher[F]
       cacheConfig    = CacheConfig(config.cache.ttl)
-      scraperService = new ScraperServiceImpl[F]
-      newsRepository = new NewsRepositoryImpl[F](xa)
-      cacheService   = new CacheServiceImpl[F](redisCommands, cacheConfig)
+      scraperService = ScraperServiceImpl.make[F]
+      newsRepository = NewsRepositoryImpl.make[F](xa)
+      cacheService   = CacheServiceImpl.make[F](redisCommands, cacheConfig)
       getNewsUseCase = GetNewsService.make[F](
         scraperService,
         newsRepository,
@@ -62,7 +62,7 @@ object Main extends IOApp {
         config.scraper.url
       )
       graphQL =
-        new SangriaGraphQL(
+        SangriaGraphQL.make(
           Schema(query = QueryType[F](dispatcher)),
           new NewsDeferredResolver[F](dispatcher),
           getNewsUseCase.pure[F] // FIXME problems with .pure type inference

@@ -48,29 +48,6 @@ The endpoints exposed by the `API` are on [this file](requests.http)
 
 Just the `application` layer [was tested](src/test/scala/io/github/sdev/application/GetNewsUseCaseServiceSpec.scala) via `unit test`. Maybe, some `it tests` could be made using `Test Containers` as an improvement of the `test coverage`.
 
-## Some words about Styling
-
-I tried to use `Hexagonal Architecture` in an `OOP` way but because of habit. For example, the following snippet:
-
-``` scala
-class CacheServiceImpl[F[_]: Logger](redisCommands: RedisCommands[F, String, String], config: CacheConfig) extends CacheService[F] {
-    // logic
-}
-```
-
-Is used instead of a more `value` oriented `Scala FP approach` like the following:
-
-``` scala
-object CacheService {
-    def apply[F[_]: Logger](redisCommands: RedisCommands[F, String, String], config: CacheConfig) =
-        new CacheService[F] {
-            ???
-        }
-}
-```
-
-But it is just a matter of style.
-
 #### TODO
 
 - `log4cats` is not working since some `sangria` and `quill` stuff was added. It needs some fixes.

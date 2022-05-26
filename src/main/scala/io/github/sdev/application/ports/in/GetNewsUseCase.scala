@@ -1,4 +1,4 @@
-package io.github.sdev.domain.usecases
+package io.github.sdev.application.ports.in
 
 import io.github.sdev.domain.entities.News
 

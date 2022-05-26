@@ -7,13 +7,13 @@ import doobie.implicits._
 import doobie.util.transactor.Transactor
 import io.getquill._
 import io.github.sdev.adapter.out.persistence.models.NewsEntity
-import io.github.sdev.application.ports.out.NewsRepository
+import io.github.sdev.application.ports.out.NewsRepositoryPort
 import io.github.sdev.domain.entities.News
 import org.polyvariant.doobiequill.DoobieContext
 
 import Ops.NewsOps
 
-class NewsRepositoryImpl[F[_]](xa: Transactor[F])(implicit F: MonadCancel[F, Throwable]) extends NewsRepository[F] {
+class NewsRepositoryImpl[F[_]](xa: Transactor[F])(implicit F: MonadCancel[F, Throwable]) extends NewsRepositoryPort[F] {
 
   private val db = new DoobieContext.Postgres(Literal)
   import db._

@@ -6,13 +6,13 @@ import dev.profunktor.redis4cats.{ RedisCommands, effects }
 import io.circe.parser.decode
 import io.circe.syntax._
 import io.github.sdev.application.json.SerDes._
-import io.github.sdev.application.ports.out.CacheService
+import io.github.sdev.application.ports.out.CacheServicePort
 import io.github.sdev.domain.entities.News
 import org.typelevel.log4cats.Logger
 
 class CacheServiceImpl[F[_]: Logger](redisCommands: RedisCommands[F, String, String], config: CacheConfig)(implicit
     F: MonadCancel[F, Throwable]
-) extends CacheService[F] {
+) extends CacheServicePort[F] {
 
   private val NEWS_KEY = "news"
 

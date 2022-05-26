@@ -55,7 +55,7 @@ object Main extends IOApp {
       scraperService = new ScraperServiceImpl[F]
       newsRepository = new NewsRepositoryImpl[F](xa)
       cacheService   = new CacheServiceImpl[F](redisCommands, cacheConfig)
-      getNewsUseCase = new GetNewsService[F](
+      getNewsUseCase = GetNewsService.make[F](
         scraperService,
         newsRepository,
         cacheService,

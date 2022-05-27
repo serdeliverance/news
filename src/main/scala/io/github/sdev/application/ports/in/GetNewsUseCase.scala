@@ -1,6 +1,5 @@
-package io.github.sdev.domain.usecases
+package io.github.sdev.application.ports.in
 
-import cats.effect.IO
 import io.github.sdev.domain.entities.News
 
 trait GetNewsUseCase[F[_]] {

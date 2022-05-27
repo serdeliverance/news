@@ -2,8 +2,8 @@ package io.github.sdev.adapter.in.graphql.impl
 
 import io.circe.Json
 import io.circe.optics.JsonPath.root
-import sangria.parser.SyntaxError
 import sangria.execution.WithViolations
+import sangria.parser.SyntaxError
 import sangria.validation.AstNodeViolation
 
 object Util {

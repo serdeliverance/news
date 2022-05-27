@@ -1,16 +1,13 @@
 package io.github.sdev.application
 
+import cats.effect.IO
+import io.github.sdev.application.ports.out.{ CacheService, NewsRepository, ScraperService }
+import io.github.sdev.domain.entities.News
+import io.github.sdev.stubs.NewsStubs
 import munit.CatsEffectSuite
 import org.mockito.Mockito.when
 import org.mockito.MockitoSugar.mock
-import io.github.sdev.application.ports.out.ScraperService
-import cats.effect.IO
-import io.github.sdev.application.ports.out.NewsRepository
-import io.github.sdev.application.ports.out.CacheService
 import org.typelevel.log4cats.slf4j.Slf4jLogger
-import io.github.sdev.domain.entities.News
-import io.github.sdev.stubs.NewsStubs
-import javax.naming.ServiceUnavailableException
 
 class GetNewsUseCaseServiceSpec extends CatsEffectSuite with NewsStubs {
 

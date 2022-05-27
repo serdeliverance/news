@@ -1,48 +1,33 @@
 package example.io.github.sdev
 
-import cats.effect.IOApp
-import cats.effect.ExitCode
-
-import fs2.Stream
+import cats.effect._
+import cats.effect.std.{ Console, Dispatcher }
+import cats.syntax.all._
+import com.comcast.ip4s._
+import dev.profunktor.redis4cats
+import dev.profunktor.redis4cats.Redis
+import dev.profunktor.redis4cats.data.RedisCodec
+import dev.profunktor.redis4cats.effect.Log.Stdout._
+import doobie.hikari._
+import doobie.util.ExecutionContexts
+import io.github.sdev.adapter.in.graphql.GraphQLRoutes
+import io.github.sdev.adapter.in.graphql.impl.SangriaGraphQL
+import io.github.sdev.adapter.in.graphql.schema.{ NewsDeferredResolver, QueryType }
+import io.github.sdev.adapter.in.rest.NewsRoutes
+import io.github.sdev.adapter.out.cache.{ CacheConfig, CacheServiceImpl }
+import io.github.sdev.adapter.out.persistence.NewsRepositoryImpl
+import io.github.sdev.application.GetNewsService
+import io.github.sdev.application.config.Config
+import io.github.sdev.scraper.ScraperServiceImpl
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.implicits._
 import org.http4s.server.middleware.{ Logger => HttpLogger }
-import cats.syntax.all._
-import com.comcast.ip4s._
-
-import io.github.sdev.adapter.in.rest.NewsRoutes
-import io.github.sdev.application.GetNewsUseCaseService
-import io.github.sdev.application.ports.out.ScraperService
-import io.github.sdev.scraper.ScraperServiceImpl
-import io.github.sdev.adapter.out.persistence.NewsRepositoryImpl
-import io.github.sdev.application.ports.out.CacheService
-import io.github.sdev.adapter.out.cache.CacheServiceImpl
-import io.github.sdev.adapter.out.cache.CacheConfig
-import cats.effect.{ Async, Resource }
-import cats.effect.std.{ Console, Dispatcher }
-import cats.effect.std
-import dev.profunktor.redis4cats.connection.RedisClient
-import dev.profunktor.redis4cats.Redis
-import dev.profunktor.redis4cats
-import dev.profunktor.redis4cats.data.RedisCodec
-import org.typelevel.log4cats.slf4j.Slf4jLogger
 import org.typelevel.log4cats.Logger
-import cats.effect.IO
-import dev.profunktor.redis4cats.effect.Log.Stdout._
+import org.typelevel.log4cats.slf4j.Slf4jLogger
 import pureconfig.ConfigSource
 import pureconfig.generic.auto._
 import pureconfig.module.catseffect.syntax._
-import io.github.sdev.application.config.Config
-import io.github.sdev.adapter.in.graphql.impl.SangriaGraphQL
-import io.github.sdev.adapter.in.graphql.schema.NewsDeferredResolver
 import sangria.schema.Schema
-import io.github.sdev.adapter.in.graphql.schema.QueryType
-import scala.concurrent.ExecutionContext
-import java.util.concurrent.Executors
-import io.github.sdev.adapter.in.graphql.GraphQLRoutes
-import doobie.util.ExecutionContexts
-import doobie.util.transactor.Transactor
-import doobie.hikari._
 
 object Main extends IOApp {
 
@@ -67,24 +52,23 @@ object Main extends IOApp {
       redisCommands <- Redis[F].utf8(config.redis.url)
       dispatcher    <- Dispatcher[F]
       cacheConfig    = CacheConfig(config.cache.ttl)
-      scraperService = new ScraperServiceImpl[F]
-      newsRepository = new NewsRepositoryImpl[F](xa)
-      cacheService   = new CacheServiceImpl[F](redisCommands, cacheConfig)
-      getNewsUseCaseService = new GetNewsUseCaseService[F](
+      scraperService = ScraperServiceImpl.make[F]
+      newsRepository = NewsRepositoryImpl.make[F](xa)
+      cacheService   = CacheServiceImpl.make[F](redisCommands, cacheConfig)
+      getNewsUseCase = GetNewsService.make[F](
         scraperService,
         newsRepository,
         cacheService,
         config.scraper.url
       )
-      graphQL <- Resource.eval(
-        new SangriaGraphQL(
+      graphQL =
+        SangriaGraphQL.make(
           Schema(query = QueryType[F](dispatcher)),
           new NewsDeferredResolver[F](dispatcher),
-          getNewsUseCaseService.pure[F]
-        ).pure[F]
-      )
+          getNewsUseCase.pure[F] // FIXME problems with .pure type inference
+        )
       httpApp = (
-        NewsRoutes.endpoints[F](getNewsUseCaseService) <+> GraphQLRoutes[F](graphQL)
+        NewsRoutes.endpoints[F](getNewsUseCase) <+> GraphQLRoutes[F](graphQL)
       ).orNotFound
       finalHttpApp = HttpLogger.httpApp(true, true)(httpApp)
       server <-

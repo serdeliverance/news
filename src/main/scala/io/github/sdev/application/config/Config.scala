@@ -1,7 +1,5 @@
 package io.github.sdev.application.config
 
-import cats.effect.Async
-import cats.syntax.all._
 import scala.concurrent.duration.FiniteDuration
 
 object Config {

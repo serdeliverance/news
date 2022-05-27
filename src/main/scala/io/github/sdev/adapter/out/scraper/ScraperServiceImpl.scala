@@ -2,7 +2,7 @@ package io.github.sdev.scraper
 
 import cats.effect.Sync
 import cats.syntax.all._
-import io.github.sdev.application.ports.out.ScraperServicePort
+import io.github.sdev.application.ports.out.ScraperNewsPort
 import io.github.sdev.domain.entities.News
 import net.ruippeixotog.scalascraper.browser.JsoupBrowser
 import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
@@ -13,7 +13,7 @@ import org.typelevel.log4cats.Logger
 object ScraperServiceImpl {
 
   def make[F[_]: Sync: Logger] =
-    new ScraperServicePort[F] {
+    new ScraperNewsPort[F] {
       override def scrapNews(siteUrl: String): F[List[News]] = {
         val browser = JsoupBrowser()
         for {

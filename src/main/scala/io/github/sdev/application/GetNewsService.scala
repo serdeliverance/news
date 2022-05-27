@@ -2,7 +2,7 @@ package io.github.sdev.application
 
 import cats.syntax.all._
 import cats.{ Applicative, Monad }
-import io.github.sdev.application.ports.out.{ CacheServicePort, NewsRepositoryPort, ScraperServicePort }
+import io.github.sdev.application.ports.out.{ CacheNewsPort, NewsRepositoryPort, ScraperNewsPort }
 import io.github.sdev.domain.entities.News
 import org.typelevel.log4cats.Logger
 import io.github.sdev.application.ports.in.GetNewsUseCase
@@ -10,9 +10,9 @@ import io.github.sdev.application.ports.in.GetNewsUseCase
 object GetNewsService {
 
   def make[F[_]: Monad: Applicative: Logger](
-      scraperService: ScraperServicePort[F],
+      scraperService: ScraperNewsPort[F],
       newsRepository: NewsRepositoryPort[F],
-      cache: CacheServicePort[F],
+      cache: CacheNewsPort[F],
       url: String
   ): GetNewsUseCase[F] =
     new GetNewsUseCase[F] {
